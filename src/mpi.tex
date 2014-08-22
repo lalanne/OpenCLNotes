@@ -1,5 +1,0 @@
-\par{Another way in which one can exploit the Intel Xeon Phi is MPI symmetric mode. Unfortunatelly the results we obtained by 
-executing DL\_POLY in symmetric mode were on the same level of performance with MPI native results. This was expected because of 
-the nature of the calculation, for each time step a MPI collective synchronization is performed hence the slowest component 
-dominates the timings. At the moment data distribution over MPI processes is homogeneous, an heterogeneous distribution should be 
-implemented if one wants to exploit this execution model.}

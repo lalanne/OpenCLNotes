@@ -14,8 +14,8 @@ SET(LATEX_OUTPUT_PATH bin)
 SET(CMAKE_CURRENT_SOURCE_DIR src)
 SET(LUALATEX_COMPILER_FLAGS "--enable-write18")
 ADD_LATEX_DOCUMENT(report.tex
-  INPUTS ack.tex introduction.tex  metal.tex  mpi.tex phi.tex conclusions.tex  
-		cpu.tex fpga.tex OpenCL.tex  offload.tex  mapping.tex  gpu.tex
+  INPUTS ack.tex introduction.tex  mxm.tex  rows.tex phi.tex conclusions.tex  
+		cpu.tex fpga.tex OpenCL.tex  naive.tex  mapping.tex  gpu.tex
 		supp.tex
   PGF_DIRS figures
   IMAGE_DIRS figures

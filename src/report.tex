@@ -112,15 +112,15 @@ urlcolor=IrishGreen,pagebackref]{hyperref}%links in pdf
 \input{gpu}
 \subsection{FPGA}
 \input{fpga}
-
-\subsubsection{Metal Forces}
-\input{metal}
-\subsection{Synchronous Offload Implementation}
-\label{sec:offload}
-\input{offload}
-\subsection{MPI Native and Symmetric}
-\label{sec:mpis}
-\input{mpi}
+%------------------------------------------------
+\section{Matrix Matrix Multiplication}
+\input{mxm}
+\subsection{Naive}
+\label{sec:naive}
+\input{naive}
+\subsection{Rows}
+\label{sec:rows}
+\input{rows}
 
 \section{Future Work and Conclusions}
 \input{conclusions}
@@ -134,6 +134,7 @@ urlcolor=IrishGreen,pagebackref]{hyperref}%links in pdf
 %	REFERENCE LIST
 %----------------------------------------------------------------------------------------
 \phantomsection
+\nocite{*}
 \bibliographystyle{unsrt}
 \bibliography{report}
 
