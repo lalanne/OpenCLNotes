@@ -16,7 +16,7 @@ SET(LUALATEX_COMPILER_FLAGS "--enable-write18")
 ADD_LATEX_DOCUMENT(report.tex
   INPUTS ack.tex introduction.tex  mxm.tex  rows.tex phi.tex conclusions.tex  
 		cpu.tex fpga.tex OpenCL.tex  naive.tex  mapping.tex  gpu.tex
-		supp.tex
+		supp.tex rowscols.tex tiling.tex
   PGF_DIRS figures
   IMAGE_DIRS figures
   BIBFILES report.bib
