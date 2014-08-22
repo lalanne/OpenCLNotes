@@ -1,0 +1,15 @@
+\par{Verlet neighbour lists, or as they are commonly known linked lists, are a common method in 
+molecular dynamics codes to reduce drastically the number of force evaluations
+during the time propagation\cite{Verlet1997}. DL\_POLY implements a modern version
+of these lists\cite{Pinches1991,Smith1994,Hockney1981}. The main idea is the partitioning of the entire simulation
+space into cells such that in order to determine all the atoms with which one atom interacts one needs to check 
+only the neighbouring cells. The version implemented in DL\_POLY is efficient with respect to the 
+MPI processes, see \fref{fig:base} pink curve, over 70\% for both Gramidicin and Iron on Host. This picture 
+is not replicated in the case of the Xeon Phi.}
+
+\par{OpenMP parallelisation of the most time consuming loop involved an extensive refactoring of the original 
+implementation. Instead of looping over all the cells and then over all the atoms in a particular cell 
+we loop over all the atoms. In this way we increas the amount of work that can be done in parallel. The results, 
+presented in \fref{fig:mpi1}, show a good scalability for small thread counts in the case of Iron on both Host 
+and Xeon Phi. Unfortunately, not the same behaviour is replicated in the case of Gramidicin. The poor scalability 
+can be attributed to the multiple branching within the OpenMP region and the role of the sequential code from this segment.}

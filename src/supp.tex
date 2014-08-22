@@ -1,0 +1,445 @@
+\readFileCols{figures/gramBaseHostMPI.dat}{ }
+\begin{luacode*}
+  tex.print("\\begin{table}[!htp]")
+  tex.print()
+  tex.print("\\caption{Gramidicin Host MPI scaling}")
+  tex.print()
+  tex.print("\\label{tab:gramHMPI}")
+  tex.print()
+  tex.print("\\begin{center}")
+  tex.print("\\begin{tabular}{|c|c|c|c|c|c|c|c|c|}")
+  tex.print("\\hline")
+  tex.print("MPI & Step[s]& Eff & Forces [s]& Eff &  Shake [s]&Eff& Lists [s] & Eff\\\\")
+  tex.print("\\hline")
+  tex.print("\\hline")
+  for k,d in pairs(dataTable) do
+    tex.sprint(d.arg1," & ",d.arg2, " & ", d.arg3, " & ", d.arg4," & ",d.arg5," & ",d.arg6," & ",d.arg7," & ",d.arg8," & ",d.arg9)
+    tex.print(" \\\\")
+    tex.print("\\hline")
+  end
+  tex.print("\\end{tabular}")
+  tex.print("\\end{center}")
+  tex.print("\\end{table}")
+\end{luacode*}
+\readFileCols{figures/gramBaseMICMPI.dat}{ }
+\begin{luacode*}
+  tex.print("\\begin{table}[!htp]")
+  tex.print()
+  tex.print("\\caption{Gramidicin MIC MPI scaling}")
+  tex.print()
+  tex.print("\\label{tab:gramMICMPI}")
+  tex.print()
+  tex.print("\\begin{center}")
+  tex.print("\\begin{tabular}{|c|c|c|c|c|c|c|c|c|}")
+  tex.print("\\hline")
+  tex.print("MPI & Step[s]& Eff & Forces [s]& Eff & Shake [s]&Eff& Lists [s] & Eff\\\\")
+  tex.print("\\hline")
+  tex.print("\\hline")
+  for k,d in pairs(dataTable) do
+    tex.sprint(d.arg1," & ",d.arg2, " & ", d.arg3, " & ", d.arg4," & ",d.arg5," & ",d.arg6," & ",d.arg7," & ",d.arg8," & ",d.arg9)
+    tex.print(" \\\\")
+    tex.print("\\hline")
+  end
+  tex.print("\\end{tabular}")
+  tex.print("\\end{center}")
+  tex.print("\\end{table}")
+\end{luacode*}
+%
+\readFileCols{figures/ironBaseHostMPI.dat}{ }
+\begin{luacode*}
+  tex.print("\\begin{table}[!htp]")
+  tex.print()
+  tex.print("\\caption{Iron Host MPI scaling}")
+  tex.print()
+  tex.print("\\label{tab:ironHMPI}")
+  tex.print()
+  tex.print("\\begin{center}")
+  tex.print("\\begin{tabular}{|c|c|c|c|c|c|c|c|c|}")
+  tex.print("\\hline")
+  tex.print("MPI & Step[s]& Eff & Metal [s]& Eff & Forces[s]&Eff& Lists [s] & Eff\\\\")
+  tex.print("\\hline")
+  tex.print("\\hline")
+  for k,d in pairs(dataTable) do
+    tex.sprint(d.arg1," & ",d.arg2, " & ", d.arg3, " & ", d.arg4," & ",d.arg5," & ",d.arg6," & ",d.arg7," & ",d.arg8," & ",d.arg9)
+    tex.print(" \\\\")
+    tex.print("\\hline")
+  end
+  tex.print("\\end{tabular}")
+  tex.print("\\end{center}")
+  tex.print("\\end{table}")
+\end{luacode*}
+%
+\readFileCols{figures/ironBaseMICMPI.dat}{ }
+\begin{luacode*}
+  tex.print("\\begin{table}[!htp]")
+  tex.print()
+  tex.print("\\caption{Iron MIC MPI scaling}")
+  tex.print()
+  tex.print("\\label{tab:ironMICMPI}")
+  tex.print()
+  tex.print("\\begin{center}")
+  tex.print("\\begin{tabular}{|c|c|c|c|c|c|c|c|c|}")
+  tex.print("\\hline")
+  tex.print("MPI & Step[s]& Eff & Metal [s]& Eff & Forces[s]&Eff& Lists [s] & Eff\\\\")
+  tex.print("\\hline")
+  tex.print("\\hline")
+  for k,d in pairs(dataTable) do
+    tex.sprint(d.arg1," & ",d.arg2, " & ", d.arg3, " & ", d.arg4," & ",d.arg5," & ",d.arg6," & ",d.arg7," & ",d.arg8," & ",d.arg9)
+    tex.print(" \\\\")
+    tex.print("\\hline")
+  end
+  tex.print("\\end{tabular}")
+  tex.print("\\end{center}")
+  tex.print("\\end{table}")
+\end{luacode*}
+\readFileCols{figures/gramHostMPI1.dat}{ }
+\begin{luacode*}
+  tex.print("\\begin{table}[!htp]")
+  tex.print()
+  tex.print("\\caption{Gramidicin Host OpenMP scaling with 1 MPI process}")
+  tex.print()
+  tex.print("\\label{tab:gramHMPI1}")
+  tex.print()
+  tex.print("\\begin{center}")
+  tex.print("\\begin{tabular}{|c|c|c|c|c|c|c|c|c|}")
+  tex.print("\\hline")
+  tex.print("\\#OMP & Step[s]& Eff & Forces [s]& Eff & Shake [s]&Eff& Lists [s] & Eff\\\\")
+  tex.print("\\hline")
+  tex.print("\\hline")
+  for k,d in pairs(dataTable) do
+    tex.sprint(d.arg1," & ",d.arg2, " & ", d.arg3, " & ", d.arg4," & ",d.arg5," & ",d.arg6," & ",d.arg7," & ",d.arg8," & ",d.arg9)
+    tex.print(" \\\\")
+    tex.print("\\hline")
+  end
+  tex.print("\\end{tabular}")
+  tex.print("\\end{center}")
+  tex.print("\\end{table}")
+\end{luacode*}
+\readFileCols{figures/gramMICMPI1.dat}{ }
+\begin{luacode*}
+  tex.print("\\begin{table}[!htp]")
+  tex.print()
+  tex.print("\\caption{Gramidicin MIC OpenMP scaling with 1 MPI process}")
+  tex.print()
+  tex.print("\\label{tab:gramMICMPI1}")
+  tex.print()
+  tex.print("\\begin{center}")
+  tex.print("\\begin{tabular}{|c|c|c|c|c|c|c|c|c|}")
+  tex.print("\\hline")
+  tex.print("\\#OMP & Step[s]& Eff & Forces [s]& Eff & Shake [s]&Eff& Lists [s] & Eff\\\\")
+  tex.print("\\hline")
+  tex.print("\\hline")
+  for k,d in pairs(dataTable) do
+    tex.sprint(d.arg1," & ",d.arg2, " & ", d.arg3, " & ", d.arg4," & ",d.arg5," & ",d.arg6," & ",d.arg7," & ",d.arg8," & ",d.arg9)
+    tex.print(" \\\\")
+    tex.print("\\hline")
+  end
+  tex.print("\\end{tabular}")
+  tex.print("\\end{center}")
+  tex.print("\\end{table}")
+\end{luacode*}
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[]
+\centering\tikzstyle{every node}=[font=\tiny]
+\begin{groupplot}[
+    group style={
+        group name=my plots,
+        group size=2 by 2,
+        xlabels at=edge bottom,
+    %    xticklabels at=edge bottom,
+        horizontal sep=3mm, vertical sep=0.5cm,
+    },
+    /tikz/mark size=1.0pt,
+    width=0.45\textwidth,
+    minor tick num =4,ymin=0,ymax=1.0,
+    grid=none,
+    legend pos=outer north east,
+    legend cell align=left,
+    legend style={xshift=5mm},
+    every axis label/.append style={font=\footnotesize},
+    x tick label style={scaled x ticks = false,
+        /pgf/number format/fixed,},
+    y tick label style={scaled y ticks = false,
+        /pgf/number format/fixed,},
+]
+\nextgroupplot[ylabel={Efficiency}, xmin=1,xmax=10,xmode=log, log basis x=2,
+ xtick={1,2,4,8,10},xticklabels={1,2,4,8,10}]
+\addplot +[blue,thick,solid] table[x index=0, y index=  2]  {figures/gramHostMPI2.dat};
+\addplot +[red,thick,solid] table[x index=0, y index=  4]  {figures/gramHostMPI2.dat};
+\addplot +[green,thick,solid] table[x index=0, y index=  6]  {figures/gramHostMPI2.dat};
+\addplot +[pink,thick,solid] table [x index=0, y index=  8] {figures/gramHostMPI2.dat};
+\nextgroupplot[ylabel={},yticklabel pos=right, ylabel near ticks,xmin=1,xmax=120,
+ xmode=log, log basis x=2,
+ xtick={1,2,4,8,10,16,20,32,60,120},xticklabels={1,2,4,8,10,16,20,32,60,120}]
+\addplot +[blue,thick,solid] table [x index=0, y index=  2] {figures/gramMICMPI2.dat};
+\addplot +[red,thick,solid] table [x index=0, y index=  4]{figures/gramMICMPI2.dat};
+\addplot +[green,thick,solid] table[x index=0, y index=  6] {figures/gramMICMPI2.dat};
+\addplot +[pink,thick,solid] table[x index=0, y index=  8] {figures/gramMICMPI2.dat};
+\legend{ time per step,
+two body forces,
+shake,
+linked lists}
+\nextgroupplot[ylabel={Efficiency}, xlabel={OMP Threads},xmin=1,xmax=10,
+ xmode=log, log basis x=2,
+ xtick={1,2,4,8,10},xticklabels={1,2,4,8,10}]
+\addplot +[blue,thick,solid] table[x index=0, y index=  2]  {figures/ironHostMPI2.dat};
+\addplot +[green,thick,solid] table[x index=0, y index=  4]  {figures/ironHostMPI2.dat};
+\addplot +[red,thick,solid] table[x index=0, y index=  6]  {figures/ironHostMPI2.dat};
+\addplot +[pink,thick,solid] table [x index=0, y index=  8] {figures/ironHostMPI2.dat};
+\nextgroupplot[ylabel={},xlabel={OMP Threads},yticklabel pos=right, ylabel near ticks,xmin=1,xmax=120,
+ xmode=log, log basis x=2,
+ xtick={1,2,4,8,10,16,20,32,60,120},xticklabels={1,2,4,8,10,16,20,32,60,120}]
+\addplot +[blue,thick,solid] table [x index=0, y index=  2] {figures/ironMICMPI2.dat};
+\addplot +[green,thick,solid] table [x index=0, y index=  4]{figures/ironMICMPI2.dat};
+\addplot +[red,thick,solid] table[x index=0, y index=  6] {figures/ironMICMPI2.dat};
+\addplot +[pink,thick,solid] table[x index=0, y index=  8] {figures/ironMICMPI2.dat};
+\legend{time per step,
+metal local density,
+two body forces,
+linked lists}
+\end{groupplot}
+\node[] at (14.0,3.0) {Gramidicin};
+\node[] at (14.0,-2.5) {Iron};
+\end{tikzpicture}
+\caption{OpenMP scalability with two MPI process for two systems Gramidicin (upper panels) and Iron(lower panels).          
+  Host scalability is reported in the left hand side and Xeon Phi in the right hand side.}
+\label{fig:mpi2}
+\end{figure}
+
+\readFileCols{figures/gramHostMPI2.dat}{ }
+\begin{luacode*}
+  tex.print("\\begin{table}[!htp]")
+  tex.print()
+  tex.print("\\caption{Gramidicin Host OpenMP scaling with 2 MPI processes}")
+  tex.print()
+  tex.print("\\label{tab:gramHMPI2}")
+  tex.print()
+  tex.print("\\begin{center}")
+  tex.print("\\begin{tabular}{|c|c|c|c|c|c|c|c|c|}")
+  tex.print("\\hline")
+  tex.print("\\#OMP & Step[s]& Eff & Forces [s]& Eff & Shake [s]&Eff& Lists [s] & Eff\\\\")
+  tex.print("\\hline")
+  tex.print("\\hline")
+  for k,d in pairs(dataTable) do
+    tex.sprint(d.arg1," & ",d.arg2, " & ", d.arg3, " & ", d.arg4," & ",d.arg5," & ",d.arg6," & ",d.arg7," & ",d.arg8," & ",d.arg9)
+    tex.print(" \\\\")
+    tex.print("\\hline")
+  end
+  tex.print("\\end{tabular}")
+  tex.print("\\end{center}")
+  tex.print("\\end{table}")
+\end{luacode*}
+\readFileCols{figures/gramMICMPI2.dat}{ }
+\begin{luacode*}
+  tex.print("\\begin{table}[!htp]")
+  tex.print()
+  tex.print("\\caption{Gramidicin MIC OpenMP scaling with 2 MPI processes}")
+  tex.print()
+  tex.print("\\label{tab:gramMICMPI2}")
+  tex.print()
+  tex.print("\\begin{center}")
+  tex.print("\\begin{tabular}{|c|c|c|c|c|c|c|c|c|}")
+  tex.print("\\hline")
+  tex.print("\\#OMP & Step[s]& Eff & Forces [s]& Eff & Shake [s]&Eff& Lists [s] & Eff\\\\")
+  tex.print("\\hline")
+  tex.print("\\hline")
+  for k,d in pairs(dataTable) do
+    tex.sprint(d.arg1," & ",d.arg2, " & ", d.arg3, " & ", d.arg4," & ",d.arg5," & ",d.arg6," & ",d.arg7," & ",d.arg8," & ",d.arg9)
+    tex.print(" \\\\")
+    tex.print("\\hline")
+  end
+  tex.print("\\end{tabular}")
+  tex.print("\\end{center}")
+  tex.print("\\end{table}")
+\end{luacode*}
+%
+%
+\readFileCols{figures/ironHostMPI1.dat}{ }
+\begin{luacode*}
+  tex.print("\\begin{table}[!htp]")
+  tex.print()
+  tex.print("\\caption{Iron Host OpenMP scaling with 1 MPI process}")
+  tex.print()
+  tex.print("\\label{tab:ironHMPI1}")
+  tex.print()
+  tex.print("\\begin{center}")
+  tex.print("\\begin{tabular}{|c|c|c|c|c|c|c|c|c|}")
+  tex.print("\\hline")
+  tex.print("\\#OMP & Step[s]& Eff & Metal [s]& Eff & Forces[s]&Eff& Lists [s] & Eff\\\\")
+  tex.print("\\hline")
+  tex.print("\\hline")
+  for k,d in pairs(dataTable) do
+    tex.sprint(d.arg1," & ",d.arg2, " & ", d.arg3, " & ", d.arg4," & ",d.arg5," & ",d.arg6," & ",d.arg7," & ",d.arg8," & ",d.arg9)
+    tex.print(" \\\\")
+    tex.print("\\hline")
+  end
+  tex.print("\\end{tabular}")
+  tex.print("\\end{center}")
+  tex.print("\\end{table}")
+\end{luacode*}
+\readFileCols{figures/ironMICMPI1.dat}{ }
+\begin{luacode*}
+  tex.print("\\begin{table}[!htp]")
+  tex.print()
+  tex.print("\\caption{Iron MIC OpenMP scaling with 1 MPI process}")
+  tex.print()
+  tex.print("\\label{tab:ironMICMPI1}")
+  tex.print()
+  tex.print("\\begin{center}")
+  tex.print("\\begin{tabular}{|c|c|c|c|c|c|c|c|c|}")
+  tex.print("\\hline")
+  tex.print("\\#OMP & Step[s]& Eff & Metal [s]& Eff & Forces[s]&Eff& Lists [s] & Eff\\\\")
+  tex.print("\\hline")
+  tex.print("\\hline")
+  for k,d in pairs(dataTable) do
+    tex.sprint(d.arg1," & ",d.arg2, " & ", d.arg3, " & ", d.arg4," & ",d.arg5," & ",d.arg6," & ",d.arg7," & ",d.arg8," & ",d.arg9)
+    tex.print(" \\\\")
+    tex.print("\\hline")
+  end
+  tex.print("\\end{tabular}")
+  tex.print("\\end{center}")
+  tex.print("\\end{table}")
+\end{luacode*}
+\readFileCols{figures/ironHostMPI2.dat}{ }
+\begin{luacode*}
+  tex.print("\\begin{table}[!htp]")
+  tex.print()
+  tex.print("\\caption{Iron Host OpenMP scaling with 2 MPI processes}")
+  tex.print()
+  tex.print("\\label{tab:ironHMPI2}")
+  tex.print()
+  tex.print("\\begin{center}")
+  tex.print("\\begin{tabular}{|c|c|c|c|c|c|c|c|c|}")
+  tex.print("\\hline")
+  tex.print("\\#OMP & Step[s]& Eff & Metal [s]& Eff & Forces[s]&Eff& Lists [s] & Eff\\\\")
+  tex.print("\\hline")
+  tex.print("\\hline")
+  for k,d in pairs(dataTable) do
+    tex.sprint(d.arg1," & ",d.arg2, " & ", d.arg3, " & ", d.arg4," & ",d.arg5," & ",d.arg6," & ",d.arg7," & ",d.arg8," & ",d.arg9)
+    tex.print(" \\\\")
+    tex.print("\\hline")
+  end
+  tex.print("\\end{tabular}")
+  tex.print("\\end{center}")
+  tex.print("\\end{table}")
+\end{luacode*}
+\readFileCols{figures/ironMICMPI2.dat}{ }
+\begin{luacode*}
+  tex.print("\\begin{table}[!htp]")
+  tex.print()
+  tex.print("\\caption{Iron MIC OpenMP scaling with 2 MPI processes}")
+  tex.print()
+  tex.print("\\label{tab:ironMICMPI2}")
+  tex.print()
+  tex.print("\\begin{center}")
+  tex.print("\\begin{tabular}{|c|c|c|c|c|c|c|c|c|}")
+  tex.print("\\hline")
+  tex.print("\\#OMP & Step[s]& Eff & Metal [s]& Eff & Forces[s]&Eff& Lists [s] & Eff\\\\")
+  tex.print("\\hline")
+  tex.print("\\hline")
+  for k,d in pairs(dataTable) do
+    tex.sprint(d.arg1," & ",d.arg2, " & ", d.arg3, " & ", d.arg4," & ",d.arg5," & ",d.arg6," & ",d.arg7," & ",d.arg8," & ",d.arg9)
+    tex.print(" \\\\")
+    tex.print("\\hline")
+  end
+  tex.print("\\end{tabular}")
+  tex.print("\\end{center}")
+  tex.print("\\end{table}")
+\end{luacode*}
+
+\readFileCols{figures/gram-off-leo-1card-5X.dat}{ }
+\begin{luacode*}
+  tex.print("\\begin{table}[!htp]")
+  tex.print()
+  tex.print("\\caption{Gramidicin all MPIs offload to one 5120D card}")
+  tex.print()
+  tex.print("\\label{tab:gramOffLeoMPI15X}")
+  tex.print()
+  tex.print("\\begin{center}")
+  tex.print("\\begin{tabular}{|c|c|c|c|c|c|c|c|c|}")
+  tex.print("\\hline")
+  tex.print("\\#MPI & Step[s]& Forces [s]& Shake [s] & Lists [s]\\\\")
+  tex.print("\\hline")
+  tex.print("\\hline")
+  for k,d in pairs(dataTable) do
+    tex.sprint(d.arg1," & ",d.arg2, " & ", d.arg3, " & ", d.arg4," & ",d.arg5)
+    tex.print(" \\\\")
+    tex.print("\\hline")
+  end
+  tex.print("\\end{tabular}")
+  tex.print("\\end{center}")
+  tex.print("\\end{table}")
+\end{luacode*}
+\readFileCols{figures/gram-off-leo-2cards-5X.dat}{ }
+\begin{luacode*}
+  tex.print("\\begin{table}[!htp]")
+  tex.print()
+  tex.print("\\caption{Gramidicin all MPIs offload to two 5120D cards}")
+  tex.print()
+  tex.print("\\label{tab:gramOffLeoMPI25X}")
+  tex.print()
+  tex.print("\\begin{center}")
+  tex.print("\\begin{tabular}{|c|c|c|c|c|c|c|c|c|}")
+  tex.print("\\hline")
+  tex.print("\\#MPI & Step[s]& Forces [s]& Shake [s] & Lists [s]\\\\")
+  tex.print("\\hline")
+  tex.print("\\hline")
+  for k,d in pairs(dataTable) do
+    tex.sprint(d.arg1," & ",d.arg2, " & ", d.arg3, " & ", d.arg4," & ",d.arg5)
+    tex.print(" \\\\")
+    tex.print("\\hline")
+  end
+  tex.print("\\end{tabular}")
+  tex.print("\\end{center}")
+  tex.print("\\end{table}")
+\end{luacode*}
+%
+\readFileCols{figures/gram-off-leo-1card-5X.dat}{ }
+\begin{luacode*}
+  tex.print("\\begin{table}[!htp]")
+  tex.print()
+  tex.print("\\caption{Gramidicin all MPIs offload to one 7120A card}")
+  tex.print()
+  tex.print("\\label{tab:gramOffLeoMPI17X}")
+  tex.print()
+  tex.print("\\begin{center}")
+  tex.print("\\begin{tabular}{|c|c|c|c|c|c|c|c|c|}")
+  tex.print("\\hline")
+  tex.print("\\#MPI & Step[s]& Forces [s]& Shake [s] & Lists [s]\\\\")
+  tex.print("\\hline")
+  tex.print("\\hline")
+  for k,d in pairs(dataTable) do
+    tex.sprint(d.arg1," & ",d.arg2, " & ", d.arg3, " & ", d.arg4," & ",d.arg5)
+    tex.print(" \\\\")
+    tex.print("\\hline")
+  end
+  tex.print("\\end{tabular}")
+  tex.print("\\end{center}")
+  tex.print("\\end{table}")
+\end{luacode*}
+\readFileCols{figures/gram-off-leo-2cards-7X.dat}{ }
+\begin{luacode*}
+  tex.print("\\begin{table}[!htp]")
+  tex.print()
+  tex.print("\\caption{Gramidicin all MPIs offload to two 7120A cards}")
+  tex.print()
+  tex.print("\\label{tab:gramOffLeoMPI27X}")
+  tex.print()
+  tex.print("\\begin{center}")
+  tex.print("\\begin{tabular}{|c|c|c|c|c|c|c|c|c|}")
+  tex.print("\\hline")
+  tex.print("\\#MPI & Step[s]& Forces [s]& Shake [s] & Lists [s]\\\\")
+  tex.print("\\hline")
+  tex.print("\\hline")
+  for k,d in pairs(dataTable) do
+    tex.sprint(d.arg1," & ",d.arg2, " & ", d.arg3, " & ", d.arg4," & ",d.arg5)
+    tex.print(" \\\\")
+    tex.print("\\hline")
+  end
+  tex.print("\\end{tabular}")
+  tex.print("\\end{center}")
+  tex.print("\\end{table}")
+\end{luacode*}
+

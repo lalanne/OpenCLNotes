@@ -1,0 +1,24 @@
+
+PROJECT(report NONE)
+
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}")
+
+INCLUDE(UseLuaTex.cmake)
+cmake_minimum_required(VERSION 2.4.8)
+if(COMMAND cmake_policy)
+  cmake_policy(VERSION 2.6)
+endif(COMMAND cmake_policy)
+
+SET(FIG_DIR figures)
+SET(LATEX_OUTPUT_PATH bin)
+SET(CMAKE_CURRENT_SOURCE_DIR src)
+SET(LUALATEX_COMPILER_FLAGS "--enable-write18")
+ADD_LATEX_DOCUMENT(report.tex
+  INPUTS ack.tex introduction.tex  metal.tex  mpi.tex shake.tex conclusions.tex  
+		openmp.tex llists.tex method.tex  offload.tex  results.tex  twobody.tex
+		supp.tex
+  PGF_DIRS figures
+  IMAGE_DIRS figures
+  BIBFILES report.bib
+  DEFAULT_PDF
+  )

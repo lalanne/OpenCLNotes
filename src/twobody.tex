@@ -1,0 +1,37 @@
+\par{Two body forces is the code segment that performs the computation of interatomic forces between a pair of atoms. Depending 
+on the system that it is computed, Iron or Gramidicin, different contributions are evaluated. If the Iron system is executed, 
+metal components of energies and forces are calculated additionally to the computation of Van der Waals and Coulumbic forces and 
+energies.}
+
+\par{Two body forces is executed for every time step of the simulation and it was originally implemented sequentially for every MPI 
+process. The sequential implementation basically consists of a loop over all the atoms that belong to a MPI process, this loop was 
+parallelised with OpenMP obtaining the results shown by the red curve in \fref{fig:mpi1}, this parallelisation forced us to 
+introduce one more dimension to several of the arrays used in the code \emph{eg.} forces and distance differences, this way 
+avoiding to lose updates due to the multi-threading nature of the parallel implementation. Although we increased the memory 
+footprint of the code, with these changes, we were able to parallelise the code improving its performance.}
+
+\par{To improve the performance of our first parallel OpenMP implementation we applied two optimisations. The first one was based 
+on \citep{Meloni2003} and consisted of avoding OpenMP reductions over multi-dimensional arrays, writing our own reductions 
+for arrays allowed us to improve the performance of the parallel loop. The second improvement was to replace all 
+the Fortran allocatable arrays involved in the computation of two body forces by automatic arrays.}
+
+\par{All the procedures called from the parallel region needed an interface, which was implemented by creating Fortran modules
+for each file that needed them.}
+
+\par{OpenMP parallelisation achieved very good scalability for Gramidicin, with an efficiency of 87\% for 20 threads on the Host
+and 75\% with 60 threads on the Xeon Phi. For Iron the OpenMP parallelisation achieved 78\% efficiency with 20 threads on the 
+Host and 62\% efficiency with 60 threads on the Xeon Phi, this is shown by the red curve in \fref{fig:mpi1}. For the Xeon Phi, 
+with a thread count over 60 threads the efficiency shows a steep decrease reaching 45\% for Gramidicin and 34\% for Iron. The 
+differences in efficiency between Gramidicin and Iron and the poor efficiency of two body forces on the Xeon Phi after 60 threads
+on the Xeon Phi need further investigations.}
+
+\par{In terms of absolute times, best cases of the OpenMP parallelisation on the Xeon Phi are 52\% slower for Gramidicin and 97\% 
+for Iron than the case when 10 MPI processes are  used on the Host with the original version of the code. The OpenMP 
+parallelisation using 20 threads achieved a speedup of 4\% over the MPI base implementation for Gramidicin and its performance 
+decreases 18\% for Iron using 20 MPI processes on the Host. Comparing the best executions on the Intel Xeon Phi, the OpenMP 
+parallelisations using 120 threads achieved similar results than the MPI only implementation of the code, the OpenMP version 
+of the code was 22\% for Iron and 15\% for Gramidicin slower than the MPI original code using 120 MPI processes.}
+
+
+
+

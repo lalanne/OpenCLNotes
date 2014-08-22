@@ -1,0 +1,94 @@
+\par{In order to reduce the MPI communication which is a slowing factor on the Xeon Phi we decided to investigate the advantages 
+of shared memory strategies. One popular approach for shared memory programming within the community is the OpenMP model 
+\cite{openmp2013}. OpenMP is a mature, standard programming model supported by all major compilers and is currently at version 
+4.0. OpenMP supports offloading mechanism for the Xeon Phi which makes it an attractive proposal for us.}
+
+\par{Starting from the time profiles of the pure MPI code we extracted the three most expensive code segments for each system for 
+up to 20 MPI processes. Evaluation of two body forces, computing the Verlet neighbour lists and applying Shake constraints are the 
+most expensive code segments for Gramidicin, from 79\% in the case of one MPI process to 68\% for 20 MPI processes. In the case 
+of Iron the most expensive segments of code are, evaluation of two body forces, computation of Verlet neighbour lists and the 
+computation of the local density, from 95\% for one MPI process to 90\% for 20 MPI processes. If one increases the MPI process
+count one can expect a dramatic change of the profile for code segments which contain MPI collectives dominating, 
+\emph{eg.} fft and shake.}
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}
+\centering\tikzstyle{every node}=[font=\tiny]
+\begin{groupplot}[
+    group style={
+        group name=my plots,
+        group size=2 by 2,
+        xlabels at=edge bottom,
+    %    xticklabels at=edge bottom,
+        horizontal sep=3mm, vertical sep=0.5cm,
+    },
+    /tikz/mark size=1.0pt,
+    width=0.45\textwidth,
+    minor tick num =4,ymin=0,ymax=1.0,
+    grid=none,
+    legend pos=outer north east,
+    legend cell align=left,
+    legend style={xshift=5mm},
+    every axis label/.append style={font=\footnotesize},
+    x tick label style={scaled x ticks = false,
+        /pgf/number format/fixed,},
+    y tick label style={scaled y ticks = false,
+        /pgf/number format/fixed,},
+]
+\nextgroupplot[ylabel={Efficiency}, xmin=1,xmax=20,
+ xmode=log, log basis x=2,
+ xtick={1,2,4,8,10,16,20},xticklabels={1,2,4,8,10,16,20}]
+\addplot +[blue,thick,solid] table[x index=0, y index=  2]  {figures/gramHostMPI1.dat};
+\addplot +[red,thick,solid] table[x index=0, y index=  4]  {figures/gramHostMPI1.dat};
+\addplot +[green,thick,solid] table[x index=0, y index=  6]  {figures/gramHostMPI1.dat};
+\addplot +[pink,thick,solid] table [x index=0, y index=  8] {figures/gramHostMPI1.dat};
+\nextgroupplot[ylabel={},yticklabel pos=right, ylabel near ticks,xmin=1,xmax=240,
+ xmode=log, log basis x=2,
+ xtick={1,2,4,8,10,16,20,32,60,120,180,240},xticklabels={1,2,4,8,10,16,20,32,60,120,180,240}]
+\addplot +[blue,thick,solid] table [x index=0, y index=  2] {figures/gramMICMPI1.dat};
+\addplot +[red,thick,solid] table [x index=0, y index=  4]{figures/gramMICMPI1.dat};
+\addplot +[green,thick,solid] table[x index=0, y index=  6] {figures/gramMICMPI1.dat};
+\addplot +[pink,thick,solid] table[x index=0, y index=  8] {figures/gramMICMPI1.dat};
+\legend{ time per step,
+two body forces,
+shake,
+linked lists}
+\nextgroupplot[ylabel={Efficiency}, xlabel={OMP Threads},xmin=1,xmax=20,
+ xmode=log, log basis x=2,
+ xtick={1,2,4,8,10,16,20},xticklabels={1,2,4,8,10,16,20}]
+\addplot +[blue,thick,solid] table[x index=0, y index=  2]  {figures/ironHostMPI1.dat};
+\addplot +[green,thick,solid] table[x index=0, y index=  4]  {figures/ironHostMPI1.dat};
+\addplot +[red,thick,solid] table[x index=0, y index=  6]  {figures/ironHostMPI1.dat};
+\addplot +[pink,thick,solid] table [x index=0, y index=  8] {figures/ironHostMPI1.dat};
+\nextgroupplot[ylabel={},xlabel={OMP Threads},yticklabel pos=right, ylabel near ticks,xmin=1,xmax=240,
+ xmode=log, log basis x=2,
+ xtick={1,2,4,8,10,16,20,32,60,120,180,240},xticklabels={1,2,4,8,10,16,20,32,60,120,180,240}]
+\addplot +[blue,thick,solid] table [x index=0, y index=  2] {figures/ironMICMPI1.dat};
+\addplot +[green,thick,solid] table [x index=0, y index=  4]{figures/ironMICMPI1.dat};
+\addplot +[red,thick,solid] table[x index=0, y index=  6] {figures/ironMICMPI1.dat};
+\addplot +[pink,thick,solid] table[x index=0, y index=  8] {figures/ironMICMPI1.dat};
+\legend{time per step,
+metal local density,
+two body forces,
+linked lists}
+\end{groupplot}
+\node[] at (14.0,3.0) {Gramidicin};
+\node[] at (14.0,-2.5) {Iron};
+\end{tikzpicture}
+\caption{OpenMP scalability with one MPI process for two systems Gramidicin (upper panels) and Iron(lower panels).          
+  Host scalability is reported in the left hand side and Xeon Phi in the right hand side. Full data is reported 
+  in Tables \jref{tab:gramHMPI1}, \jref{tab:gramMICMPI1}, \jref{tab:ironHMPI1} and \jref{tab:ironMICMPI1}}
+\label{fig:mpi1}
+\end{figure}
+
+\par{OpenMP scalability of time per step with one MPI process is poor as shown in the blue curve of \fref{fig:mpi1} on both Host 
+and Xeon Phi for both systems, this is caused mainly by the poor scalability of linked lists for Gramidicin, and, linked lists and 
+metal local density for Iron and the rest of sequential code segments which are around 20\%.}
+
+\par{Thread affinity plays a major role in the performance on Xeon Phi. We have investigated \emph{compact, scatter,
+balanced} and \emph{explicit} affinities and we concluded that \emph{compact} provides by far the worst performance for us. 
+The last three offer similar performances with a slight advantage for \emph{scatter}, hence all the results reported
+in this section are obtained using \emph{scatter} affinity.}
+
+

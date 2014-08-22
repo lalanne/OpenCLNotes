@@ -1,0 +1,148 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Stylish Article
+% LaTeX Template
+% Version 2.0 (13/4/14)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Mathias Legrand (legrand.mathias@gmail.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fleqn,12pt,onecolumn]{ipcc} % Document font size and equations flushed left
+
+\usepackage{lipsum} % Required to insert dummy text. To be removed otherwise
+\usepackage{tikz} % good quality graphs
+\usepackage{pgfplots}
+\usetikzlibrary{pgfplots.groupplots}
+\pgfplotsset{compat=newest}
+
+%----------------------------------------------------------------------------------------
+%	COLUMNS
+%----------------------------------------------------------------------------------------
+
+\setlength{\columnsep}{0.55cm} % Distance between the two columns of text
+\setlength{\fboxrule}{0.75pt} % Width of the border around the abstract
+
+%----------------------------------------------------------------------------------------
+%	COLORS
+%----------------------------------------------------------------------------------------
+
+\definecolor{IrishGreen}{RGB}{0,0,90} % Color of the article title and sections
+\definecolor{RoyalBlue}{RGB}{0,20,20} % Color of the boxes behind the abstract and headings
+
+%----------------------------------------------------------------------------------------
+%	HYPERLINKS
+%----------------------------------------------------------------------------------------
+
+\usepackage[colorlinks=true,bookmarks=true,plainpages=false,
+linkcolor=IrishGreen, citecolor=IrishGreen, 
+urlcolor=IrishGreen,pagebackref]{hyperref}%links in pdf
+\usepackage[compress,numbers,comma]{natbib} %references
+\usepackage{hypernat} %references
+%----------------------------------------------------------------------------------------
+%	ARTICLE INFORMATION
+%----------------------------------------------------------------------------------------
+
+\JournalInfo{Intel Parallel Computing Centres Report} % Journal information
+\Archive{WIP} % Additional notes (e.g. copyright, DOI, review/research article)
+
+\PaperTitle{Porting DL\_POLY to Xeon Phi} % Article title
+
+\Authors{Alin M. Elena\textsuperscript{1}*, Christian Lalanne\textsuperscript{1}, Victor Gamayunov\textsuperscript{2}, Gilles Civario\textsuperscript{1}, Michael Lysaght\textsuperscript{1} } % Authors
+\affiliation{\textsuperscript{1}\textit{Intel Parallel Computing Centre, Irish Centre for High End Computing}} % Author affiliation
+\affiliation{\textsuperscript{2}\textit{Intel}} % Author affiliation
+\affiliation{*\textbf{Corresponding author}: alin.elena@ichec.ie} % Corresponding author
+
+\Keywords{Molecular Dynamics, OpenMP, MPI, Xeon Phi} % Keywords - if you don't want any simply remove all the text between the curly brackets
+\newcommand{\keywordname}{Keywords} % Defines the keywords heading name
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT
+%----------------------------------------------------------------------------------------
+
+\Abstract{TBAL}
+
+%----------------------------------------------------------------------------------------
+\graphicspath{{figures/}}
+%colours
+\definecolor{IrishGreen}{cmyk}{0.70, 0.00, 0.80, 0.10}
+\definecolor{RoyalBlue}{cmyk}{0.1, 0.0, 0.0, 0.02}
+
+\begin{document}
+
+\flushbottom % Makes all text pages the same height
+
+\maketitle % Print the title and abstract box
+
+\tableofcontents % Print the contents section
+
+\thispagestyle{empty} % Removes page numbering from the first page
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+
+\section*{Introduction} % The \section*{} command stops section numbering
+\addcontentsline{toc}{section}{Introduction} % Adds this section to the table of contents with negative horizontal space equal to the indent for the numbered sections
+\input{introduction}
+
+%------------------------------------------------
+
+\section{Methodology}
+\input{method}
+
+%------------------------------------------------
+
+\section{Results and Discussion}
+\input{results}
+\subsection{OpenMP Parallelisation}
+\label{sec:openmp}
+\input{openmp}
+\subsubsection{Shake}
+\input{shake}
+\subsubsection{Two Body Forces}
+\input{twobody}
+\subsubsection{Linked Lists}
+\input{llists}
+\subsubsection{Metal Forces}
+\input{metal}
+\subsection{Synchronous Offload Implementation}
+\label{sec:offload}
+\input{offload}
+\subsection{MPI Native and Symmetric}
+\label{sec:mpis}
+\input{mpi}
+
+\section{Future Work and Conclusions}
+\input{conclusions}
+%------------------------------------------------
+\phantomsection
+\section*{Acknowledgments} % The \section*{} command stops section numbering
+\addcontentsline{toc}{section}{Acknowledgments} % Adds this section to the table of contents with negative horizontal space equal to the indent for the numbered sections
+\input{ack.tex}
+
+%----------------------------------------------------------------------------------------
+%	REFERENCE LIST
+%----------------------------------------------------------------------------------------
+\phantomsection
+\bibliographystyle{unsrt}
+\bibliography{report}
+
+\phantomsection
+\section*{Supplementary Information} % The \section*{} command stops section numbering
+\addcontentsline{toc}{section}{Supplementary Information} % Adds this section to the table of contents with negative horizontal space equal to the indent for the numbered sections
+\input{supp}
+%----------------------------------------------------------------------------------------
+
+\end{document}

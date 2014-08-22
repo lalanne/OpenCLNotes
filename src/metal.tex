@@ -1,0 +1,16 @@
+\par{This code segment is executed for every time step of the simulation(only in the case of the Iron system) and it is used to 
+compute local densities in metals, this is performed using the verlet neighbour list and Finnis-Sinclair type potential 
+\citep{finnis1984sen}. These local densities are computed sequentially using two loops over the atoms of every MPI process.}
+
+\par{The parallelisation of this algorithm was performed using OpenMP over these two loops, the results of this parallelisation
+are shown by the green curve on the bottom panels of \fref{fig:mpi1}. This parallelisation does not achieve good efficiency, with 
+44\% with 20 threads on the Host and 17\% with 60 threads on the Xeon Phi. The main reasons for this poor performance is an 
+MPI process synchronization segment at the end of the computation of metal densities and some sequential code still present in
+the computation.}
+
+\par{We noticed during the parallelisation of this code that some calculations performed are also computed in 
+two body forces \emph{eg.} calculation of the differences between atom positions. To optimise this, we stored these values to not 
+perform the same computation twice. We did not obtain good results with this optimisation, due to the increase of memory foot 
+print that the implementation of this optimisation introduced, also the code added in two body forces to allow this optimisation 
+degraded the performance in the case of the Gramidicin system.}
+

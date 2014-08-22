@@ -1,0 +1,23 @@
+\par{Molecular dynamics techniques grew rapidly in the last twenty years. 
+The grow was fuelled by development of new scalable mathematical algorithms, availability 
+of powerful hardware and better availability of ready to use software packages. DL\_POLY is one of 
+these packages, widely adopted by the computational physics and material science communities.}
+\par{DL\_POLY started its life in 1994 at Daresbury Laboratory, now part of Science \& Technology Facilities 
+Council in United Kingdom. The main developers for the currect version are W Smith and IT Todorov. DL\_POLY is 
+a general classical molecular dynamics code and was used to simulate macro molecules (both biological and synthetic),
+complex fluids, materials and ionic liquids. DL\_POLY also plays an important role as sandbox for both development
+of new methods and algorithms for molecular dynamics and testing of emerging hardware 
+technologies\cite{dlpoly} and \cite{Todorov2006}.
+The core code is written in Fortran 90 and optimised for distributed systems using domain decomposition, also OpenMP and CUDA ports exist as 
+contributions to DL\_POLY but not part of the official distribution.
+DL\_POLY is free of use for UK academics pursuing non-commerical research and available for licensing for the rest.
+Over 3000 licenses were offered over the years worldwide.
+}
+\par{The Intel Xeon Phi co-processor is a novel accelerator technology that provides few appealing features as:
+many cores, 60 cores with 240 hardware threads for the mid model, low power consumption, the same set as 
+instructions as an Intel CPU, supports popular and standardised programming models as MPI and OpenMP and a 
+theoretical peak of 1~TFlops.}
+\par{In this communication we present the progress made in porting and optimising DL\_POLY to Xeon Phi co-processor. 
+The rest of the paper is organised as follows: a short introduction to the methodology used for port and optimisation,
+OpenMP implementation results in \sref{sec:openmp}, synchronous offload ones in \sref{sec:offload}, MPI symmetric
+ running mode in \sref{sec:mpis}.}
