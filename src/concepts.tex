@@ -6,6 +6,23 @@
         part of a \emph{work group} executing on a compute unit\cite{opencl12}. It also could be defined as the basic unit of work
         on a OpenCL device\cite{intro_opencl}.
 
-    &  \textbf{\textit{Work Group:}} Collection of related \emph{work items} that executes in a single \emph{compute unit}. The 
+    & \textbf{\textit{Work Group:}} Collection of related \emph{work items} that executes in a single \emph{compute unit}. The 
         \emph{work items} in a \emph{work group} executes the same kernel\cite{opencl12}.
+
+    & \textbf{\textit{Compute Unit:}} An OpenCL \emph{device} has a group of \emph{compute units}. A \emph{work group} always
+        executes on \emph{compute unit}, also a \emph{compute unit} is composed by one or more 
+        \emph{processing elements}\cite{opencl12}.
+
+    & \textbf{\textit{Processing Element:}} A virtual scalar processor. A \emph{work item} executes in one or more 
+        \emph{processing elements}\cite{opencl12}.
+
+    & \textbf{\textit{Platform:}} A \emph{platform} is a group of \emph{devices} managed by the Opencl framework 
+        that allow an application to share resources and execute \emph{kernels} on \emph{devices} in the 
+        \emph{platform}\cite{opencl12}.
+
+    & \textbf{\textit{Device:}} Collection of \emph{compute units} \emph{e.g. GPUs, multi-core CPU, DSPs or Cell/B.E. processor}
+        \cite{opencl12}.
 \end{easylist}
+
+
+
