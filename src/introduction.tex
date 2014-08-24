@@ -1,2 +1,13 @@
-\par{...}
+\par{Performance portability it is not guaranteed, architectures such as GPUs, Xeon Phi or FPGAs have different
+    hardware designs and these differences make that they take advantage of different software optimisations\cite{opencl_phi},
+    examples of this are:}
+
+\begin{itemize}
+    \item GPUs usually rely on the existance of fast \emph{shared local memory}, which is explicitely managed by the developer, on
+        the other hand Intel Xeon Phi includes a fully coherent cache hierarchy, similar to regular CPU caches, which it is there
+        to automatically speedup memory accesses\cite{opencl_phi}.
+
+    \item GPUs are based on hardware scheduling of many tiny threads, Intel Xeon Phis rely on the device OS to schedule medium size
+        threads(probably a source of overhead in comparison with a GPU)\cite{opencl_phi}.
+\end{itemize}
 
