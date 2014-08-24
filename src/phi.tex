@@ -32,7 +32,12 @@
         when you call \emph{clEnqueueNDRange()}, the intel driver schedules the \emph{work groups} of the current \emph{NDRange}
         into the 240 threads\cite{opencl_phi}.
     \item The OpenCL compiler implicitely vectorize the \emph{work group} routine based on dimension zero loop.
-    \item The vector size is always 16, regardless of the data type used by the kernel.
+    \item The vector size is always 16, regardless of the data type used by the kernel. As OpenCL \emph{work items} are guaranteed
+        to be independent, the OpenCL vectorizer needs no feasibility to apply vectorization. However the vectorized kernel is only
+        used if the local size of dimension zero is greater or equal to 16(even for double precision floating point numbers?). 
+        Otherwise, the OpenCL runtime runs the scalar kernel for each of the \emph{work items}. Also it is important to mention that
+        if the \emph{work group} size at dimension zero is not divisible by 16, then the end of the \emph{work group} needs to be 
+        executed by scalar version of the kernel\cite{opencl_phi}.
 \end{itemize}
 
 
