@@ -38,6 +38,19 @@
         Otherwise, the OpenCL runtime runs the scalar kernel for each of the \emph{work items}. Also it is important to mention that
         if the \emph{work group} size at dimension zero is not divisible by 16, then the end of the \emph{work group} needs to be 
         executed by scalar version of the kernel\cite{opencl_phi}.
+    \item Non-uniform branching at dimension 0 the \emph{NDRange} is executed by flattening the code via predication and 
+        ultimatelly executing both path of the branch and then apply masks, thus the usage of non-uniform branching is penalized by 
+        a high overhead in the execution of the \emph{kernel}\cite{opencl_phi}.
 \end{itemize}
+
+\par{...\ref{PhiDeviceInfo}}
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/phi_device_info.png}
+    \caption{Intel Xeon Phi device information.}
+    \label{PhiDeviceInfo}
+\end{figure}
+
 
 
