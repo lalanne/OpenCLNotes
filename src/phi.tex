@@ -11,6 +11,7 @@
     \item Each core has a L2 cache of 512KB between data and instructions(combined 30MB of L2 cache). Miss latency 500-1000 cycles
         \cite{opencl_phi,phi_specs}.
     \item High speed interconect between L2 caches and the memory subsystem\cite{opencl_phi}.
+    \item Simple automatic hardware prefetcher to L2\cite{opencl_phi}.
     \item Each core can execute 4 hardware threads simultaneously, 240 threads in total. These threads help to hide 
         instruction and memory latency\cite{opencl_phi}.
 \end{itemize}
@@ -28,22 +29,40 @@
 \subsubsection{Mapping}
 \begin{itemize}
     \item A \emph{work group} is the smallest task being scheduled on the threads\cite{opencl_phi}.
+    \item \emph{Kernels} execute concurrently on multiple \emph{work items} in the SIMD units of every core\cite{opencl_phi_opt}.
+    \item Each \emph{work group} is assigned to one thread that loops over all \emph{work items} within the \emph{work group} 
+        with SIMD. So you have parallelism at the \emph{work group} level (vector instructions) and parallelism between 
+        \emph{work groups} (threading)\cite{opencl_phi_opt}.
     \item At initialization time the Intel OpenCL driver creates 240 software threads and pins them to the hardware threads, then
         when you call \emph{clEnqueueNDRange()}, the intel driver schedules the \emph{work groups} of the current \emph{NDRange}
         into the 240 threads\cite{opencl_phi}.
     \item The OpenCL compiler implicitely vectorize the \emph{work group} routine based on dimension zero loop.
-    \item The vector size is always 16, regardless of the data type used by the kernel. As OpenCL \emph{work items} are guaranteed
-        to be independent, the OpenCL vectorizer needs no feasibility to apply vectorization. However the vectorized kernel is only
-        used if the local size of dimension zero is greater or equal to 16(even for double precision floating point numbers?). 
-        Otherwise, the OpenCL runtime runs the scalar kernel for each of the \emph{work items}. Also it is important to mention that
-        if the \emph{work group} size at dimension zero is not divisible by 16, then the end of the \emph{work group} needs to be 
-        executed by scalar version of the kernel\cite{opencl_phi}.
+    \item The recommended work-group size for kernels is multiple of 16, which equals the SIMD width for the float and int data 
+        type. The automatic vectorization module packs the work-items into SIMD packets of 16 items (for double as well), and 
+        processed the rest (“tail”) of the work-group in a scalar way. In other words, a work-group with the size of 2*SIMD\_WIDTH 
+        executes faster than, the one with the size of 2* SIMD\_WIDTH-1\cite{opencl_phi_opt,opencl_phi}.
     \item Non-uniform branching at dimension 0 the \emph{NDRange} is executed by flattening the code via predication and 
         ultimatelly executing both path of the branch and then apply masks, thus the usage of non-uniform branching is penalized by 
         a high overhead in the execution of the \emph{kernel}\cite{opencl_phi}.
+    \item Using OpenCL \emph{local memory} does not provide any benefit on the Intel Xeon Phi. OpenCL \emph{local memory} is 
+        allocated on the regular GDDR memory(\emph{global memory}) and is supported by the cache system like any other memory. 
+        Therefore, it introduces additional overhead in terms of redundant data copy and management\cite{opencl_phi}.
+    \item The combination of \emph{kernel} with barriers and \emph{work groups} nondivisible by 16, results in the execution of a
+        scalar \emph{kernel}.
 \end{itemize}
 
-\par{...\ref{PhiDeviceInfo}}
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/phi_model.png}
+    \caption{OpenCL mapping for Intel Xeon Phi.}
+    \label{PhiModel}
+\end{figure}
+
+\par{Figure \ref{PhiModel} shows a summary of the mapping of OpenCL concepts into the Intel Xeon Phi co-processor, figure 
+    \ref{PhiDeviceInfo} shows the output of an OpenCL information request to the OpenCL run-time, it shows 236 
+    \emph{compute units}(one per thread), the size of \emph{local memory} 32KB that match with the total amount of memory for L1 cache and
+    the 6GB of total \emph{global memory} that matches with the amount of RAM available on the Intel Xeon Phi. In this context is 
+    safe to assume that private memory on the Intel Xeon Phi is implemented via hardware registers.} 
 
 \begin{figure}[!h]
     \centering
