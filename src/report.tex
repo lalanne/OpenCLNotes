@@ -24,8 +24,24 @@
 \usepackage{tikz} % good quality graphs
 \usepackage{pgfplots}
 \usepackage[ampersand]{easylist}
+\usepackage{listings}
+\lstset{language=C} 
 \usetikzlibrary{pgfplots.groupplots}
 \pgfplotsset{compat=newest}
+
+\lstdefinestyle{customc}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=C,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+}
 
 %----------------------------------------------------------------------------------------
 %	COLUMNS
@@ -85,6 +101,7 @@ urlcolor=IrishGreen,pagebackref]{hyperref}%links in pdf
 \maketitle % Print the title and abstract box
 \tableofcontents % Print the contents section
 \listoffigures % list of figures
+\listoflistings %list of listings
 \thispagestyle{empty} % Removes page numbering from the first page
 
 %----------------------------------------------------------------------------------------
