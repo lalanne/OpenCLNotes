@@ -16,7 +16,7 @@ Xeon shows the same trend but with an smaller speedup 3.5 approximately.}
 \lstinputlisting[caption={Naive kernel LLVM code Intel Xeon Phi.}, label={llvm_code_naive_phi}, 
                 style=customc]{/Users/clalanne/GitHubProjects/OpenCLNotes/src/code/llvm_naive_phi.ll}
 
-\par{This could be explained in both cases by what the comiler and the run-time trying to do in terms of vectorization. In both 
+\par{This could be explained in both cases by what the compiler and the run-time trying to do in terms of vectorization. In both 
 cases these numbers fit the vectorization that the compiler is trying to achieved, listings 
 \ref{llvm_code_naive_cpu} and \ref{llvm_code_naive_phi}, shows the type of LLVM instructions that the intel compiler is using to 
 vectorize operations, its possible to see that the Xeon cpu is using a factor of 4 and the Intel Xeon Phi is using a factor of 16.}
@@ -39,8 +39,15 @@ This is because the GPU run out of resources in those cases\cite{opencl_error} a
 memory access pattern its far from ideal in the top of this the gathering of data from memory force to have a high CPI(clock per
 instructions). This is true even in the Xeon and Intel Xeon Phi architecture even though both count with a automatic caching system.}
 
-\par{Figure \ref{NaiveComp} shows that GPUs achived the best performance in comparison with the other architectures, when the 
-    \emph{work group} size is 1x1024 ...\emph{explanation}.}
+\par{Figure \ref{NaiveComp} shows that GPUs achived the best performance in comparison with the other architectures. This is 
+    reasonable and it was expected for the kernels studied in this report. The reason is because you can think on the model of vector
+    execution of the Xeon Phi and the Xeon as smaller \emph{warps} in this sense the GPU can execute wider and more \emph{warps} in
+    parallel than the other 2 architectures.}
+    
+\par{In this case in particular the gpu is faster than the other architectures when the \emph{work group} size is 1x1024 
+    , it is interesting to observe that in this case the with a \emph{work group} size of 1x1024 is faster than 1024x1,this is 
+    mainly because with 1x1024 the memory access pattern to the matrix B its coalesced which does not happen when the \emph{
+        work group} dimension is 1024x1.}
 
 \begin{figure}[!h]
     \centering
