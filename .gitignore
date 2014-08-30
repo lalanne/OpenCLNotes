@@ -1,4 +1,5 @@
 *.swp
+*.swo
 bin
 CMakeCache.txt
 CMakeFiles
