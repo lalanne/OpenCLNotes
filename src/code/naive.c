@@ -1,5 +1,4 @@
-__kernel
-void naive(__global float* a, __global float* b, __global float* output)
+__kernel void naive(__global float* a, __global float* b, __global float* output)
 {
   int r = get_global_id(0);
   int c = get_global_id(1);
