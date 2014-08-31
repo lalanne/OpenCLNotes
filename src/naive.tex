@@ -2,7 +2,7 @@
     Optimisations were not implemented on this kernels as it can be seen in listing \ref{naive_kernel}. Every instance
     of the kernel calculates one element of the output matrix.}
 
-\lstinputlisting[caption={Naive kernel.}, label={naive_kernel}, 
+\lstinputlisting[float,caption={Naive kernel.}, label={naive_kernel}, 
                 style=customc]{/Users/clalanne/GitHubProjects/OpenCLNotes/src/code/naive.c}
 
 \par{The results executing this kernel in different architectures with different number of \emph{work groups } can be seen 
@@ -10,10 +10,10 @@ in figure \ref{Naive}. From these figures we can notice immediatelly that using 
 \emph{work items} in the dimension 0 speedups the execution of the kernel roughly 8 times in the case of Intel Xeon Phi.
 Xeon shows the same trend but with an smaller speedup 3.5 approximately.}
 
-\lstinputlisting[caption={Naive kernel LLVM code Xeon.}, label={llvm_code_naive_cpu}, 
+\lstinputlisting[float,caption={Naive kernel LLVM code Xeon.}, label={llvm_code_naive_cpu}, 
                 style=customc]{/Users/clalanne/GitHubProjects/OpenCLNotes/src/code/llvm_naive_cpu.ll}
 
-\lstinputlisting[caption={Naive kernel LLVM code Intel Xeon Phi.}, label={llvm_code_naive_phi}, 
+\lstinputlisting[float,caption={Naive kernel LLVM code Intel Xeon Phi.}, label={llvm_code_naive_phi}, 
                 style=customc]{/Users/clalanne/GitHubProjects/OpenCLNotes/src/code/llvm_naive_phi.ll}
 
 \par{This could be explained in both cases by what the compiler and the run-time trying to do in terms of vectorization. In both 

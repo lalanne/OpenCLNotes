@@ -1,4 +1,10 @@
-\par{...\ref{RowsCols}\ref{RowsColsComp}}
+
+\par{Listing \ref{private_local_memory_kernel} shows the kernel that uses together private and local memory to cache column B.}
+
+\lstinputlisting[float,caption={Kernel making use of \emph{private memory} and \emph{local memory}.},label={private_local_memory_kernel}, 
+                style=customc]{/Users/clalanne/GitHubProjects/OpenCLNotes/src/code/private_local_memory.c}
+
+\par{The results can be seen in figure \ref{RowsCols}}
 
 \begin{figure}[!h]
     \centering
@@ -8,6 +14,8 @@
     \caption{Rows and columns optimisation matrix multiplication in different architectures.}
     \label{RowsCols}
 \end{figure}
+
+\par{\ref{RowsColsComp}}
 
 \begin{figure}[!h]
     \centering
