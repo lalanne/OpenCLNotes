@@ -1,23 +1,36 @@
 \subsubsection{Architecture}
-\begin{itemize}
-    \item 60 cores, In-order\cite{phi_specs}.
-    \item 1.053 GHz of clock speed per core\cite{phi_specs}.
-    \item Every core contains a 512-bit vector arithmetic unit(executing SIMD vector instructions). It fits 8 double precision 
-        floating point numbers, or 16 single precision floating point numbers. Each core can issue a single vector instruction per
-        cycle\cite{opencl_phi}(this execution looks similar to an Nvidia GPU \emph{warp}), so vector instructions issued by 
-        different threads in the same core are sequentialized, they do not execute in parallel(at the same cycle).
-    \item Each core has a L1 cache memory of 32KB for data and 32KB for instructions(64KB total). Miss latency 15-30
-        cycles and access to L1 cache has a latency of 1 cycle\cite{opencl_phi}.
-    \item Each core has a L2 cache of 512KB between data and instructions(combined 30MB of L2 cache). Miss latency 500-1000 cycles
-        \cite{opencl_phi,phi_specs}.
-    \item High speed interconect between L2 caches and the memory subsystem\cite{opencl_phi}.
-    \item Simple automatic hardware prefetcher to L2\cite{opencl_phi}.
-    \item Each core can execute 4 hardware threads simultaneously, 240 threads in total. These threads help to hide 
-        instruction and memory latency\cite{opencl_phi}.
-\end{itemize}
+
+\par{Table \ref{tab:phi_arch} contains the main hardware characteristics of the Xeon Phi device.}
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{| l | l | l | l |}
+    \hline
+    \# cores & 60(in-order) \\ \hline
+    clock speed & 1.053 GHz \\ \hline
+    vector unit & 512-bit \\ \hline
+    L1 & 32KB(data)+32KB(instructions) 64KB total\\ \hline
+    L2 & 512KB(data+instructions)\\ \hline
+    \end{tabular}
+    \caption{Xeon Phi characteristics.}
+    \label{tab:phi_arch}
+\end{table}
+
+\par{Every core contains vector arithmetic unit(executing SIMD vector instructions). It fits 8 double precision 
+    floating point numbers, or 16 single precision floating point numbers. Each core can issue a single vector instruction per
+    cycle\cite{opencl_phi}(this execution looks similar to an Nvidia GPU \emph{warp}), so vector instructions issued by 
+    different threads in the same core are sequentialized, they do not execute in parallel(at the same cycle).}
+
+\par{L1 cache misses have a latency of 15-30 cycles and access to L1 cache has a latency of 1 cycle. Each core has a L2 cache,
+    combined all these L2 cache is a total 30MB of L2 cache in the device, miss latency for this type of memory is 500-1000 
+    cycles\cite{opencl_phi,phi_specs}.}
+
+\par{Also Xeon Phi provides a high speed interconect between L2 caches and the memory subsystem, a simple automatic hardware 
+    prefetcher to L2 and each core can execute 4 hardware threads simultaneously, 240 threads in total. These threads help to hide 
+    instruction and memory latency\cite{opencl_phi}.}
 
 \par{OpenCL hides most of this detail from the programmer, figure \ref{PhiArch} shows a global view of the Intel Xeon Phi 
-    architecture.\cite{opencl_phi}}
+    architecture\cite{opencl_phi}.}
 
 \begin{figure}[!h]
     \centering
@@ -31,7 +44,7 @@
     \item A \emph{work group} is the smallest task being scheduled on the threads\cite{opencl_phi}.
     \item \emph{Kernels} execute concurrently on multiple \emph{work items} in the SIMD units of every core\cite{opencl_phi_opt}.
     \item Each \emph{work group} is assigned to one thread that loops over all \emph{work items} within the \emph{work group} 
-        with SIMD. So you have parallelism at the \emph{work group} level (vector instructions) and parallelism between 
+        with SIMD. Thus you have parallelism at the \emph{work group} level (vector instructions) and parallelism between 
         \emph{work groups} (threading)\cite{opencl_phi_opt}.
     \item At initialization time the Intel OpenCL driver creates 240 software threads and pins them to the hardware threads, then
         when you call \emph{clEnqueueNDRange()}, the intel driver schedules the \emph{work groups} of the current \emph{NDRange}
