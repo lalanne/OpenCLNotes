@@ -1,13 +1,17 @@
-\par{This kernel is as far as we know, the most straightforward implementation of matrix matrix multiplication kernel.
-    Optimisations were not implemented on this kernels as it can be seen in listing \ref{naive_kernel}. Every instance
-    of the kernel calculates one element of the output matrix.}
+\par{This implementation of the \emph{kernel} is as far as we know, the most straightforward implementation of 
+    matrix matrix multiplication algorithm. Optimisations were not implemented on this kernels as it can be seen in 
+    listing \ref{naive_kernel}.} 
+    
+\par{Every instance of the kernel calculates one element of the output matrix(line 8), 
+    the \emph{NDRange} call is in 2 dimensions and all the memory used for output and input data is global, this \emph{kernel}
+    does not forced caching or register usage.}
 
 \lstinputlisting[float,caption={Naive kernel.}, label={naive_kernel}, 
                 style=customc]{/Users/clalanne/GitHubProjects/OpenCLNotes/src/code/naive.c}
 
 \par{The results executing this kernel in different architectures with different number of \emph{work groups } can be seen 
 in figure \ref{Naive}. From these figures we can notice immediatelly that using \emph{work groups} larger than or equal than 16
-\emph{work items} in the dimension 0 speedups the execution of the kernel roughly 8 times in the case of Intel Xeon Phi.
+\emph{work items} in dimension 0 speedup the execution of the \emph{kernel} roughly 8 times in the case of Intel Xeon Phi.
 Xeon shows the same trend but with an smaller speedup 3.5 approximately.}
 
 \lstinputlisting[float,caption={Naive kernel LLVM code Xeon.}, label={llvm_code_naive_cpu}, 
@@ -22,7 +26,10 @@ cases these numbers fit the vectorization that the compiler is trying to achieve
 vectorize operations, its possible to see that the Xeon cpu is using a factor of 4 and the Intel Xeon Phi is using a factor of 16.}
 
 \par{Another important issue to notice is that as you would assume theoretically the gathering of elements to fill the vector 
-units on the Intel Xeon Phi seems to take almost of the time of the kernel as we can see in figure \ref{vtune_naive}.}
+    units on the Intel Xeon Phi seems to take almost all of the time of the kernel as we can see in figure \ref{vtune_naive}. This 
+    figure shows that this kernel spend an excesive amount of time gathering(\emph{vgatherdps}\footnote{Gather 2/4 packed 
+    single-precision floating point values from memory referenced by the given base address, dword indices and scale 
+    \cite{intrinsics}.}) data from memory rather than doing computation.}
 
 \begin{figure}[!h]
     \centering
@@ -33,21 +40,18 @@ units on the Intel Xeon Phi seems to take almost of the time of the kernel as we
 
 \par{Also figure \ref{Naive} shows that not in all of the \emph{work group} sizes it is possible to execute the kernel in the GPU. 
 This is because the GPU run out of resources in those cases\cite{opencl_error} as its possible to see in figure 
-\ref{GpuDeviceInfo}.}
+\ref{GpuDeviceInfo}(Max \emph{work group} size).}
 
-\par{Reading the kernel\ref{naive_kernel}, its possible to see that there is no effort to use caches efficiently, locality of
-memory access pattern its far from ideal in the top of this the gathering of data from memory force to have a high CPI(clock per
-instructions). This is true even in the Xeon and Intel Xeon Phi architecture even though both count with a automatic caching system.}
+\par{Reading the listing \ref{naive_kernel}, its possible to see that there is no effort to use caches efficiently, the locality of
+    memory access pattern its far from ideal. At the top of this, the gathering of data from memory force to have a high CPI(clock per
+    instructions)\footnote{The CPI value of an application or function is an indication of how much latency affected its execution. 
+    Higher CPI values mean there was more latency in your system – on average, it took more clockticks for an instruction to retire. 
+    Latency in your system can be caused by cache misses, I/O, or other bottlenecks\cite{cpi}.} 
+    rate. This is true even in the Xeon and Xeon Phi where both count with an automatic caching system.}
 
-\par{Figure \ref{NaiveComp} shows that GPUs achived the best performance in comparison with the other architectures. This is 
-    reasonable and it was expected for the kernels studied in this report. The reason is because you can think on the model of vector
-    execution of the Xeon Phi and the Xeon as smaller \emph{warps} in this sense the GPU can execute wider and more \emph{warps} in
-    parallel than the other 2 architectures.}
-    
-\par{In this case in particular the gpu is faster than the other architectures when the \emph{work group} size is 1x1024 
-    , it is interesting to observe that in this case the with a \emph{work group} size of 1x1024 is faster than 1024x1,this is 
-    mainly because with 1x1024 the memory access pattern to the matrix B its coalesced which does not happen when the \emph{
-        work group} dimension is 1024x1.}
+\par{Figure \ref{NaiveComp} shows that GPUs achived the best performance in comparison with the other architectures particularly
+    in the case where the \emph{work group} dimension is 1x1024 this is mainly because with 1x1024 the memory access pattern to 
+    matrix B its coalesced which means that the GPU can combine several memory accesses into a single transaction.(\emph{deeper..})}
 
 \begin{figure}[!h]
     \centering
@@ -58,10 +62,4 @@ instructions). This is true even in the Xeon and Intel Xeon Phi architecture eve
     \label{Naive}
 \end{figure}
 
-\begin{figure}[!h]
-    \centering
-    \includegraphics[width=0.6\textwidth]{figures/naive_comp.png}
-    \caption{Naive matrix multiplication in different architectures comparison.}
-    \label{NaiveComp}
-\end{figure}
 
