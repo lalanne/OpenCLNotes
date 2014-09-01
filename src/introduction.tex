@@ -1,5 +1,8 @@
+\par{OpenCL provides a portable language(C99 based) for highly parallel processors, the focus of this portability is in the 
+    semantics of the code.}
+
 \par{Performance portability it is not guaranteed, architectures such as GPUs, Xeon Phi or FPGAs have different
-    hardware designs and these differences make that they take advantage of different software optimisations\cite{opencl_phi},
+    hardware designs and these differences make them to take advantage of different software optimisations\cite{opencl_phi},
     examples of this are:}
 
 \begin{itemize}
@@ -9,5 +12,9 @@
 
     \item GPUs are based on hardware scheduling of many tiny threads, Intel Xeon Phis rely on the device OS to schedule medium size
         threads(probably a source of overhead in comparison with a GPU)\cite{opencl_phi}.
+
+    \item Models of execution of Nvidia GPUs without having explicit vector units, base their execution in group of threads 
+    executing instructions in lock-step mode, whereas CPUs and Xeon Phi having wide vector units available base their execution 
+    model in inter and intra vectorization of \emph{work items}\cite{vector}.
 \end{itemize}
 
