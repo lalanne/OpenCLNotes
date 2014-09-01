@@ -1,6 +1,7 @@
 \begin{itemize}
     \item\textbf{\textit{Global Memory:}} Read and write access from all the \emph{work items} in all the \emph{work groups}. Reads
-        and writes to \emph{global memory} may be cached depending on the capabilities of the \emph{device}\cite{opencl12}.
+        and writes to \emph{global memory} may be cached depending on the capabilities of the \emph{device}\cite{opencl12}
+        (\emph{e.g. Xeon and Xeon Phi}).
 
     \item\textbf{\textit{Constant Memory:}} Sector of \emph{global memory} that remains constant over the execution of a kernel.
         This is read only memory and writable by the \emph{host} but not the \emph{devices}\cite{wikipedia_opencl,opencl12}.

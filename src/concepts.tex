@@ -10,11 +10,12 @@
         \emph{work items} in a \emph{work group} executes the same kernel\cite{opencl12}.
 
     \item\textbf{\textit{Compute Unit:}} An OpenCL \emph{device} has a group of \emph{compute units}. A \emph{work group} always
-        executes on \emph{compute unit}, also a \emph{compute unit} is composed by one or more 
-        \emph{processing elements}\cite{opencl12}.
+        executes on a \emph{compute unit}, also a \emph{compute unit} is composed by one or more 
+        \emph{processing elements}\cite{opencl12}(\emph{e.g. Streaming Multiprocessor in K20x Nvidia GPU, 
+        hardware thread on Xeon Phi}).
 
     \item\textbf{\textit{Processing Element:}} A virtual scalar processor. A \emph{work item} executes in one or more 
-        \emph{processing elements}\cite{opencl12}.
+        \emph{processing elements}\cite{opencl12}(\emph{e.g. vector lane in a CPU, thread in a GPU }). 
 
     \item\textbf{\textit{Platform:}} A \emph{platform} is a group of \emph{devices} managed by the Opencl framework 
         that allow an application to share resources and execute \emph{kernels} on \emph{devices} in the 
