@@ -46,6 +46,16 @@
 \par{Only one \emph{kernel} can execute in a device at one time. \emph{Work groups} divide into groups of 32 threads called warps. 
     Warps always perform the same instruction and they are basic scheduling units \cite{gpu_opencl_opt_slides}.}
 
+\par{...\ref{GpuModel}}
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/gpu_model.png}
+    \caption{OpenCL mapping for GPU.}
+    \label{GpuModel}
+\end{figure}
+
+
 \par{OpenCL \emph{private memory} is implemented as registers in the GPU, \emph{local memory} is implemented as shared memory 
     in the GPU\cite{gpu_opencl_opt_slides}.}
 
