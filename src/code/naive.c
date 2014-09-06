@@ -1,17 +1,17 @@
-__kernel void naive(__global float* a, __global float* b, __global float* output)
+__kernel void naive(__global float* A, __global float* B, __global float* C)
 {
-  int r = get_global_id(0);
-  int c = get_global_id(1);
+  int x = get_global_id(0);
+  int y = get_global_id(1);
   int rank = get_global_size(0);
-  float running = 0.0f;
+  float acc = 0.0f;
 
-  for (int index=0; index<rank; index++) {
-    int aIndex = r*rank + index;
-    int bIndex = index*rank + c;
-    running +=  a[aIndex] * b[bIndex];
+  for (int i=0; i<rank; i++) {
+    int aIndex = x*rank + i;
+    int bIndex = i*rank + y;
+    acc +=  A[aIndex] * B[bIndex];
   }
   
-  output[r*rank + c] = running;
+  C[x*rank + y] = acc;
   return;
 }
 

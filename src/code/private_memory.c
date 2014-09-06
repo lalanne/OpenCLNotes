@@ -1,18 +1,18 @@
-__kernel void private_memory(__global float* a, __global float* b, __global float* output)
+__kernel void private_memory(__global float* A, __global float* B, __global float* C)
 {
-    int r = get_global_id(0);
-    int c, index;
-    float running;
+    int x = get_global_id(0);
+    int y, index;
+    float acc;
     int rank = get_global_size(0);
     float A_private[4096];
 
-    for(index = 0; index < rank; index++) A_private[index] = a[r*rank + index];
+    for(index = 0; index < rank; index++) A_private[index] = A[x*rank + index];
        
-    for (c=0; c < rank; c++) {
-        running  = 0.0f;
+    for (y=0; y < rank; y++) {
+        acc  = 0.0f;
         for(index = 0; index <  rank; index++)
-            running +=  A_private[index] * b[index*rank+c];
-        output[r*rank + c] = running;
+            acc +=  A_private[index] * B[index*rank+y];
+        C[x*rank + y] = acc;
     }   
     return;
 }
