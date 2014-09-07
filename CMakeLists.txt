@@ -17,7 +17,8 @@ ADD_LATEX_DOCUMENT(report.tex
   INPUTS ack.tex introduction.tex  mxm.tex  rows.tex phi.tex conclusions.tex  
 		cpu.tex fpga.tex OpenCL.tex  naive.tex  mapping.tex  gpu.tex
 		supp.tex rowscols.tex tiling.tex concepts.tex platModel.tex memModel.tex
-        moreWork.tex lu.tex LUalgOv.tex diag.tex per.tex internal.tex
+        moreWork.tex lu.tex LUalgOv.tex diag.tex per.tex internal.tex nbody.tex
+        nbodyOpenCL.tex
   PGF_DIRS figures
   IMAGE_DIRS figures
   BIBFILES report.bib

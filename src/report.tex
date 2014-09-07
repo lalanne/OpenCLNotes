@@ -25,6 +25,7 @@
 \usepackage{pgfplots}
 \usepackage[ampersand]{easylist}
 \usepackage{listings}
+\usepackage{amsmath}
 \lstset{language=C} 
 \usetikzlibrary{pgfplots.groupplots}
 \pgfplotsset{compat=newest}
@@ -114,6 +115,7 @@ urlcolor=IrishGreen,pagebackref]{hyperref}%links in pdf
 \listoftables %list of tables
 \thispagestyle{empty} % Removes page numbering from the first page
 
+
 %----------------------------------------------------------------------------------------
 %	ARTICLE CONTENTS
 %----------------------------------------------------------------------------------------
@@ -174,7 +176,11 @@ urlcolor=IrishGreen,pagebackref]{hyperref}%links in pdf
 \input{per}
 \subsubsection{Internal Kernel}
 \input{internal}
-
+%------------------------------------------------
+\section{N-Body Methods}
+\input{nbody}
+\subsection{Implementation with OpenCL}
+\input{nbodyOpenCL}
 %------------------------------------------------
 \section{Future Work and Conclusions}
 \input{conclusions}
