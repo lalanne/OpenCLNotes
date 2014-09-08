@@ -1,0 +1,30 @@
+\par{On the Xeon and Xeon Phi architectures from Intel, to take advantage of these architecture, vectorization is compulsary.
+    The OpenCL compiler provided by Intel, rewrites scalar and explicitly vectorized(Intel documentation firmly 
+    advice against writing vector code using OpenCL vector types) kernel code into SIMD code. Intel documentation,
+    does not explain the type of transformations that the compiler does to the code to vectorize it, which is a 
+    problem when as programmers we want to track performance of OpenCL kernels.}
+
+\par{Normally, to vectorize a loop(if dependencies do not exist), the loop is strip mined\footnote{Strip mining 
+    transforms a singly nested loop into a doubly nested one, where the step of the outer loop is determined by for example
+    vector length\cite{loops}.} by the vector length and then every scalar instruction in the loop is replaced by its 
+    vector equivalent\cite{vector}.}
+
+\par{As far as we know there are 2 types of vector transformations that the compiler can do over \emph{work items}(given
+    that \emph{work items} are the basic unit of computation in OpenCL) to use vector units.}
+
+\begin{itemize}
+    \item Vectorization inside of a \emph{Work Item}, it is basically loop unrolling by a factor equal to the vector lenght of the
+    architecture(16 for single precision on the Xeon Phi) then transforming the scalar instructions to vector instructions.
+
+    \item Vectorization merging \emph{Work Items}, this vectorization is across \emph{work items} merging them making them 
+    ``wider", and because of this reducing the number of \emph{work items} initially lunched by the 
+    \emph{NDRange} call by a factor equal to the vector length of the architecture.
+\end{itemize}
+
+\par{This approaches can be applied together to OpenCL \emph{kernels}, although there are kernels that benefit better from 
+    only one of this 2 approaches\cite{vector}.}
+    
+
+
+
+
