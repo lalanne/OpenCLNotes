@@ -26,10 +26,10 @@ cases these numbers fit the vectorization that the compiler is trying to achieve
 vectorize operations, its possible to see that the Xeon cpu is using a factor of 4 and the Intel Xeon Phi is using a factor of 16.}
 
 \lstinputlisting[float,caption={Naive kernel LLVM code Xeon.}, label={llvm_code_naive_cpu}, 
-                style=customc]{/Users/clalanne/GitHubProjects/OpenCLNotes/src/code/llvm_naive_cpu.ll}
+                style=customc]{/Users/lalanne/MyCode/GitHubProjects/OpenCLNotes/src/code/llvm_naive_cpu.ll}
 
 \lstinputlisting[float,caption={Naive kernel LLVM code Intel Xeon Phi.}, label={llvm_code_naive_phi}, 
-                style=customc]{/Users/clalanne/GitHubProjects/OpenCLNotes/src/code/llvm_naive_phi.ll}
+                style=customc]{/Users/lalanne/MyCode/GitHubProjects/OpenCLNotes/src/code/llvm_naive_phi.ll}
 
 \par{Another important issue to notice is that as you would assume theoretically the gathering of elements to fill the vector 
     units on the Xeon Phi and Xeon seems to take almost all of the time of the kernel as we can see in figure \ref{vtune_naive}. This 
