@@ -26,6 +26,7 @@
 \usepackage[ampersand]{easylist}
 \usepackage{listings}
 \usepackage{amsmath}
+\usepackage{mathtools}
 \lstset{language=C} 
 \usetikzlibrary{pgfplots.groupplots}
 \pgfplotsset{compat=newest}
@@ -181,6 +182,8 @@ urlcolor=IrishGreen,pagebackref]{hyperref}%links in pdf
 \input{nbody}
 \subsection{Implementation with OpenCL}
 \input{nbodyOpenCL}
+\subsection{Graphical Trends}
+\input{nbodyGraphicalTrends}
 %------------------------------------------------
 \section{Future Work and Conclusions}
 \input{conclusions}
@@ -194,6 +197,7 @@ urlcolor=IrishGreen,pagebackref]{hyperref}%links in pdf
 %----------------------------------------------------------------------------------------
 %	REFERENCE LIST
 %----------------------------------------------------------------------------------------
+\newpage
 \phantomsection
 %\nocite{*}
 \bibliographystyle{unsrt}

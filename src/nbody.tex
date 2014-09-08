@@ -25,17 +25,20 @@
     \Phi_i^{solvent} = \frac{q_i}{\in_{out}}\frac{1}{(1+\alpha\frac{\in_{in}}{\in_{out}})}\Bigg[\frac{1+\alpha}{d_i}-\frac{\alpha(1-\frac{\in_in}{\in_out})}{r}\Bigg]
 \end{equation}
 
-\par{Where \Phi is electrostatic potential at point of interest/observation, \emph{qi} is the 
-    electrostatic potential at point of interest/observation, \emph{di} is the distance from 
-    the source charge qi to the point of observation, \alpha is a constant and \emph{r} is the 
-    distance from the point of observation to the ``centre".}
-
-\par{\emph{A} is the effective electrostatic size of the molecule and \emph{p} is the perpendicular 
-    distance of the vertex point from the surface of the molecule.}
+\begin{itemize}
+    \item $\Phi$: electrostatic potential at point of interest/observation.
+    \item \emph{di}: distance from the source charge qi to the point of observation.
+    \item \emph{qi}: electrostatic potential at point of interest/observation.
+    \item $\alpha$: constant.
+    \item  \emph{r}: distance from the point of observation to the ``centre".
+    \begin{itemize}
+        \item \emph{A}: effective electrostatic size of the molecule.
+        \item \emph{p}: perpendicular distance of the vertex point from the surface of the molecule.
+    \end{itemize}
+\end{itemize}
 
 \par{The molecular surface(solid line) separates the low dielectric interior(\in in blue region) 
     from the high dielectric solvent space, \in out.}
-
 
 \par{The method of Hierarchical Charge Partitioning(HCP)(figure \ref{hpc}) is also implemented within the code, 
     to allow for greater accuracy while also restricting the computational bottlenecks. 
