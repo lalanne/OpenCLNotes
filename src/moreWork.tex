@@ -29,10 +29,19 @@
     these 2 architectures, on the Xeon Phi is 236 and
     on the Xeon CPU is 40, as the number of \emph{work groups} decreases, 
     as it is shown on table \ref{tab:work_groups}, the amount
-    of available parallelism that take advantage of the \emph{comput units} 
+    of available parallelism that take advantage of the \emph{compute units} 
     available in these 2 architectures decreases as well.}
 
-\par{{\color{red} ANALYSIS OF THE GPU....}}
+\par{The trend in figure \ref{MoreWork} for the GPU follows a different pattern
+    than in the Xeon and Xeon Phi. After decreasing almost linearly for 
+    \emph{work group} dimensions of 1 and 2, because of the increment of
+    \emph{work items} executing in parallel in every SMX, the trend reach a 
+    plateau. The execution time stop to decrease mainly because of the memory
+    access pattern of the matrix A, which is completely strided, forcing the 
+    system to access \emph{global memory} multiple times losing the performance
+    gained by executing more \emph{work items} in parallel in a warp. For 
+    \emph{work group} dimension of more than 512 you start to loose parallelism
+    and take advantage of the 13 compute units in the GPU.}
 
 \begin{table}[!h]
     \centering
@@ -55,7 +64,11 @@
 \end{table}
 
 \par{In this case the most performant of the 3 architectures analized is the 
-    Xeon as its shown on figure\ref{MoreWorkRes} {\color{red}whyyyyy??????}.}
+    Xeon as its shown on figure\ref{MoreWorkRes}. This could be explained by
+    the small amount of parallelism needed to take advantage of the low number
+    of compute units in the Xeon(40). Furthermore the execution of the kernel
+    on the Xeon based on vectorization(2 modes) and the deeper cache hierarchy, 
+    makes the Xeon not as sensible to the memory access pattern as the GPU.}
 
 \begin{figure}[!h]
     \centering
@@ -66,7 +79,11 @@
 
 \par{Figures \ref{gpu}, \ref{phi} and \ref{xeon} show that the 
     only device that obtained some performance improvements from this \emph{kernel}
-    change was the Xeon.{\color{red}whyyyyy??????}}
+    change was the Xeon. This is basically because the Xeon is the only architecture
+    that does not need huge amount of parallelism like the GPU and the Xeon Phi.
+    Intel recommends for the Xeon Phi to use at least 1000 \emph{work groups} and
+    in the GPU the new \emph{kernel} affected the memory access pattern 
+    changing it from coalesced to strided.
 
 
 
