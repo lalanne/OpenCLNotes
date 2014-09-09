@@ -110,6 +110,13 @@
     A also can be optimised, all the \emph{work items} in a warp access(read only)
     to the same memory space}.
 
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.49\textwidth]{figures/naiveRes.png}
+    \caption{Comparison between the best cases in the different devices.}
+    \label{NaiveRes}
+\end{figure}
+
 \par{Using warps and lock-step execution for the 
     GPU and vectorization of \emph{work items} for the Xeon and Xeon Phi, both
     memory access patterns are similar, with the difference that if we look at
@@ -123,12 +130,6 @@
 \par{{\color{red} make comparison of Gflops theoretical per device/ practical
     naive kernel}}
 
-\begin{figure}[!h]
-    \centering
-    \includegraphics[width=0.49\textwidth]{figures/naiveRes.png}
-    \caption{Comparison between the best cases in the different devices.}
-    \label{NaiveRes}
-\end{figure}
 
 
 
