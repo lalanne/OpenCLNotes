@@ -12,8 +12,9 @@
 \par{As in the previous kernel line \emph{12} shows the copy of elements to 
     \emph{private memory} and line \emph{15} shows the 
     copy of elements from \emph{global memory} to \emph{local memory}. This 
-    copies are performed by all the \emph{work times} working as a team inside
-    of a \emph{work group}. To synchronize all the \emph{work items} in a 
+    copies are performed by all the \emph{work items} working as a team inside
+    of a \emph{work group}(each \emph{work item} load part of the column). 
+    To synchronize all the \emph{work items} in a 
     \emph{work group} and to not have data races we use barriers(provided
     by OpenCL) this way all the \emph{work items} in a \emph{work group}
     are forced to wait for all the \emph{work items} to reach this barriers 
@@ -22,48 +23,60 @@
 \par{Figure \ref{RowsCols} shows the results of this kernel for different 
     architectures, not all \emph{work group} dimensions 
     were possible to execute for this \emph{kernel}. For the case of the Xeon 
-    and Xeon Phi from the 32x32 the runtime returned
-    error -5, that means was a failure to allocate resources\cite{opencl_error}
-    .{\color{red} I don't know whyyyy :'(}}
+    and Xeon Phi from 32 \emph{work items} per \emph{work group} 
+    the runtime returned error -5, that means that a failure ocurred allocating 
+    resources\cite{opencl_error}. {\color{red} TODO:Why?}}
 
-\par{Intel Xeon Phi documentation\cite{opencl_phi} advise against using explicit
+\par{Intel Xeon Phi documentation\cite{opencl_phi} advises against using explicit
     local memory, because the cache system takes care of this automatically, 
     furthermore they explain that specifically for the Xeon Phi
     local memory is allocated in 
     \emph{global memory} anyways and the explicit definition of \emph{local
     memory} causes an overhead in terms of redundant data copy and management.
     This can explain the degradation in performance on the Xeon phi shown in
-    figure \ref{RowsCols}, but on the xeon there is a reduction in execution time
-    on the Xeon even though the same problem should happen on the Xeon.}
+    figure \ref{phi} in comparison with the previous \emph{kernel}. Figure \ref{xeon}
+    shows that in the Xeon there is a reduction in execution time even though
+    the same issue should happens on the CPU.}
 
 \begin{figure}[!h]
     \centering
     \includegraphics[width=0.49\textwidth]{figures/opt3_phi.png}
     \includegraphics[width=0.49\textwidth]{figures/opt3_cpu.png}
     \includegraphics[width=0.49\textwidth]{figures/opt3_gpu.png}
-    \caption{Rows and columns optimisation matrix multiplication in different architectures.}
+    \caption{Rows and columns optimisation matrix multiplication in different 
+            architectures.}
     \label{RowsCols}
 \end{figure}
 
-\par{It seems to be a trade off here, between the the loop necesary to execute 
-    the copy of elements of B to \emph{local memory}
+\par{On the Xeon Phi execution it seems to be a trade off, 
+    between the the time that takes to execute the loop necesary to 
+    copy the elements of B to \emph{local memory}
     (expensive gathering operations with a very poor L1 hit ratio) and the 
-    performance achieve in the loop where the kernel executes
-    the computation(\emph{maybe vtune shot}).}
+    performance achieved in the loop where the kernel executes
+    the computation.{\color{red} Maybe vtune shoot of the C kernel}}
+
+\par{Figure \ref{RowsCols} shows that in the GPU while we increment the number of \emph{
+    work items} inside of a \emph{work group} the execution time decreases almost
+    linearly until the size of 128, because of the utilization of the entire
+    width(32) of the warps and the 4 warps available to execute in parallel in
+    every SMX. After that the decreasing in time of execution reaches a plateau
+     because the resource of every SMX are already full(4 warps per SMX, 32 \emph{
+        work items} per warp). Figure
+     \ref{gpu} shows that this \emph{kernel} did not improve the performance of 
+     the previous \emph{kernel} mainly because the memory access pattern of B
+     in the previous \emph{kernel} and B\_local in this \emph{kernel} did not
+     change at all, even though we change the algoritm.}
 
 \par{In this case the best time is achived again by the GPU as we can see in 
     figure \ref{RowsColRes}, Also we can notice that the only 
     architectures that is able to take advantage of this optimisation is the 
-    Xeon. The Xeon Phi even have a warning in its 
-    documentation about not using \emph{local} memory explicitelly as in this 
-    case, because of the cache system already is using 
-    automatically this memory, and even warn about possible overhead time if 
-    this memory is defined explicitely\cite{opencl_phi}.}
+    Xeon.}
 
 \begin{figure}[!h]
     \centering
     \includegraphics[width=0.49\textwidth]{figures/rowColRes.png}
-    \caption{Rows and columns optimisation matrix multiplication best results in different devices.}
+    \caption{Rows and columns optimisation matrix multiplication best results 
+            in different devices.}
     \label{RowsColRes}
 \end{figure}
 

@@ -1,4 +1,15 @@
-\par{...\ref{tilingResults}}
+\par{Listing \ref{tiling} the last optimisation for matrix multiplication. In
+    this \emph{kernel} we pass from host code 2 arrays allocated in \emph{local
+    memory} to store tiles of matrix A and B. This \emph{kernel} is executed in
+    phases enforced by barrier synchronization inside of every \emph{work group}.
+    The code shows in listing \ref{tiling} shows that every \emph{work item} loads
+    2 elements for the tile(one from A and one from B), these elements are reused 
+    by different \emph{work items} in the \emph{work group}, all \emph{work items
+    } in a \emph{work group} calculate part of the block of the resulting matrix.}
+
+\par{The results of this \emph{kernel} are shown in figure \ref{tilingResults},
+    this \emph{kernel} shows the best L1 cache hit ratio of all the \emph{
+        kernels} exercised in this report.}
 
 \begin{figure}[!h]
     \centering
@@ -9,16 +20,9 @@
     \label{tilingResults}
 \end{figure}
 
-\par{Listing \ref{tiling} shows the algorithm.}
-
-\par{loading a tile in to local memory, execution in phases, plus barrier synchronization }
-
-\par{execution will be divided in phases, every phase data accesses will be in a tile of A and a tile of B}
-\par{work items in a work group participate in loading a tile}
-\par{Now Im passing the kernel 2 more arguments than naive implementation, for storing in local memory tilings of A and B}
-\par{first barrier waits for all the work items to load the data into local memory}
-\par{every work-time maintains running variable in registers}
-\par{improvement of number of floating point operations per load instructions, and this improves as the block size increase}
+\par{Figure \ref{gpu}, \ref{phi} and \ref{xeon} show that this optimisation 
+    results in the best execution time in comparison against all the other
+    \emph{kernels}.}
 
 \subsubsection{Summary Matrix Matrix Multiplication}
 
