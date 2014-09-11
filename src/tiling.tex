@@ -1,8 +1,9 @@
-\par{Listing \ref{tiling} the last optimisation for matrix multiplication. In
-    this \emph{kernel} we pass from host code 2 arrays allocated in \emph{local
+\par{Listing \ref{tiling} shows the last optimisation for matrix multiplication. In
+    this \emph{kernel} we pass from host code to the \emph{kernel} 
+    2 arrays allocated in \emph{local
     memory} to store tiles of matrix A and B. This \emph{kernel} is executed in
     phases enforced by barrier synchronization inside of every \emph{work group}.
-    The code shows in listing \ref{tiling} shows that every \emph{work item} loads
+    The code in listing \ref{tiling} shows that every \emph{work item} loads
     2 elements for the tile(one from A and one from B), these elements are reused 
     by different \emph{work items} in the \emph{work group}, all \emph{work items
     } in a \emph{work group} calculate part of the block of the resulting matrix.}
@@ -20,9 +21,17 @@
     \label{tilingResults}
 \end{figure}
 
+\par{We can see in figure \ref{tilingResults} that while the size of the tiling
+    increases the performance in every architecture increases, this is because
+    the reuse of data by every \emph{work item} increases as well, and more values
+    of the resulting matrix are calculated just accessing \emph{local memory}
+    which is share memory on the GPU and probably L1 cache on the Xeon and 
+    Xeon Phi.}
+
 \par{Figure \ref{gpu}, \ref{phi} and \ref{xeon} show that this optimisation 
     results in the best execution time in comparison against all the other
-    \emph{kernels}.}
+    \emph{kernels}. This is mainly because the reuse of data that it is stored
+    in share memory(GPU) and caches(Xeon and Xeon Phi).}
 
 \subsubsection{Summary Matrix Matrix Multiplication}
 
