@@ -7,7 +7,7 @@
     \begin{tabular}{| l | l | l | l |}
     \hline
     \# GPUs & 1 \\ \hline
-    \# Streaming Multiprocessors(SMX) & 15 \\ \hline
+    \# Streaming Multiprocessors(SMX) & 13 \\ \hline
     \# single precision cores / SMX & 192 \\ \hline
     \# cores & 2688 \\ \hline
     clock speed & 732MHz \\ \hline
@@ -39,14 +39,17 @@
 \end{figure}
 
 \subsubsection{Mapping}
-\par{The CUDA architecture is a scalar architecture. Therefore, there is no performance benefit from using vector types and 
-    instructions, a \emph{work item} is executed on a scalar processor and \emph{work groups} are executed on multiprocessors(SMX)
-    \cite{gpu_opencl_cuda,gpu_opencl_opt_slides}.}
+\par{The CUDA architecture is a scalar architecture. Therefore, there is no 
+    performance benefit from using vector types and 
+    instructions, a \emph{work item} is executed on a scalar processor and 
+    \emph{work groups} are executed on multiprocessors(SMX)
+    \cite{gpu_opencl_cuda,gpu_opencl_opt_slides}. A summary of the mapping of
+    OpenCL to a GPU is shown in figure \ref{GpuModel}}
 
-\par{Only one \emph{kernel} can execute in a device at one time. \emph{Work groups} divide into groups of 32 threads called warps. 
-    Warps always perform the same instruction and they are basic scheduling units \cite{gpu_opencl_opt_slides}.}
-
-\par{...\ref{GpuModel}}
+\par{Only one \emph{kernel} can execute in a device at one time. 
+    \emph{Work groups} divide into groups of 32 threads called warps. 
+    Warps always perform the same instruction and they are basic scheduling 
+    units \cite{gpu_opencl_opt_slides}.}
 
 \begin{figure}[!h]
     \centering
