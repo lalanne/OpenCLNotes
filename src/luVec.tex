@@ -1,0 +1,7 @@
+\par{In each of the three \emph{kernels}, low vectorisation usage was observed. 
+    The Xeon Phi has a vector width of 512 bits, which fits 8 double-precision 
+    floating-point numbers. Thus, for the LU decomposition a vectorisation 
+    intensity of 8 was the target. However, this was never the case. For example, 
+    for block sizes of 2, a vectorisation intensity of 1 was achieved, 
+    indicating that, for each vector instruction, only one data element was 
+    processed. In other words, there was no vectorisation at all.}

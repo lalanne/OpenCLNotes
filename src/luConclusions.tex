@@ -1,0 +1,27 @@
+\par{It is clear that this algorithm is not suited to parallel computing. 
+    In spite of this, some interesting results were still found. 
+    The results from this analysis highlight the importance of 
+    writing optimised OpenCL code for each architecture. 
+    The performance of the algorithm was severely hindered 
+    by bad memory accesses and low vectorisation. Some relatively simple 
+    modifications to the algorithm could lead to a significant improvement 
+    in performance.}
+
+\par{Although some useful results were found, the analysis of this algorithm 
+    was limited for a number of reasons. The Intel VTune Amplifier was a 
+    useful tool that yielded some interesting results, but it was often 
+    difficult and slow to use, so it was impossible to investigate everything 
+    that needed to be investigated in the time that was available. Also, 
+    not having access to an profiler for OpenCL on GPUs made accurate, 
+    in-depth analysis of the algorithm on the GPU very difficult.}
+
+\par{Further analysis of this algorithm might wish to take a 
+    closer look at some of the issues relating to memory accesses 
+    and scheduling overhead. For example, it is still unclear why 
+    small amounts of data are requiring the use of L2 cache. 
+    Any optimisations to this algorithm would need to create simpler 
+    kernel code that allows the OpenCL compiler to implicitly vectorise 
+    the instructions.}
+
+\par{It also remains to be seen how this OpenCL algorithm can perform 
+    on an FPGA.}

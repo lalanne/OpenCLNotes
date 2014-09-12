@@ -1,13 +1,21 @@
-\par{This OpenCL implementation of the LU decomposition was done with three separate kernels. 
-    Each of these kernels performed operations on different areas of a NxN matrix and the kernels were enqueued multiple times.}
+\par{This OpenCL implementation of the LU decomposition was done with three 
+    separate \emph{kernels}. Each of these \emph{kernels} performed operations on different 
+    areas of a NxN matrix and the \emph{kernels} were enqueued multiple times.}
 
-\par{A key parameter in this algorithm is the block size, which is defined both in the host and kernel code. 
-    It can take values of 2, 4, 8, 16, 32 and 64. A block size of 64 is not supported on the GPU, due to 
-    work-group size restrictions. The value of the block size is not changed during the computation. 
-    The block size explicitly determines a number of variables, including the number of work-groups, 
-    the number of work items per work-group, the size of the data block and the number of times the kernels are enqueued. 
-    It is also important to note that the overall number of floating point operations required to compute the LU decomposition 
-    varies according to the block size.}
+\par{A key parameter in this algorithm is the block size, which is defined 
+    both in the host and \emph{kernel} code. It can take values of 2, 4, 8, 16, 32 
+    and 64. A block size of 64 is not supported on the GPU, due to \emph{work group} 
+    size restrictions. The value of the block size is not changed during the 
+    computation. The block size explicitly determines a number of variables, 
+    including the number of \emph{work groups}, the number of \emph{work items} per 
+    \emph{work group}, the size of the data block and the number of times the 
+    \emph{kernels} are enqueued. It is also important to note that the overall number of 
+    floating point operations required to compute the LU decomposition varies 
+    according to the block size.}
 
-\par{The three kernels are enqueued at each iteration of a for loop in the host code, with various parameters 
-    such as the number of work groups, number of work items and data size changing at each iteration of the loop.}
+
+\par{The three \emph{kernels} are enqueued at each iteration of a for loop in the 
+    host code, with various parameters such as the number of \emph{work groups}, 
+    number of \emph{work items} and data size changing at each iteration of the 
+    loop.}
+
