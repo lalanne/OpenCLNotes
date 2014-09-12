@@ -19,7 +19,7 @@ ADD_LATEX_DOCUMENT(report.tex
 		supp.tex rowscols.tex tiling.tex concepts.tex platModel.tex memModel.tex
         moreWork.tex lu.tex LUalgOv.tex diag.tex per.tex internal.tex nbody.tex
         nbodyOpenCL.tex nbodyGraphicalTrends.tex vec.tex luVtune.tex luVec.tex
-        luCon.tex luCPI.tex luMAP.tex luConclusions.tex
+        luCon.tex luCPI.tex luMAP.tex luConclusions.tex nbodyMAP.tex
   PGF_DIRS figures
   IMAGE_DIRS figures
   BIBFILES report.bib
