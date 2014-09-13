@@ -24,6 +24,8 @@
     \label{nbodyL1}
 \end{figure}
 
+\subsubsection{Calculation instability, different results on the 
+              different architectures}
 \par{Running the same kernel using the same input file 
     (bio molecule and vertex locations) on the same architecture resulted 
     in the same output (electrostatic potential for each vertex) on every run, 
@@ -31,13 +33,35 @@
 
 \par{However, upon comparing results for tests under similar settings for 
     all of the 3 different architectures, resulted in variations of the 
-    decimal numbers for 10\^-4 and below. Please look at table above.
+    decimal numbers for 10\^-4 and below, this is shown in table \ref{tab:n1}.
     One possible theory for this is that since the architectures have different 
     types of parallelism, there is a potential issue of order of aggregating 
     results. As OpenCL is providing portability, the order of calculating 
     floating point numbers would have changed which ultimately resulting in 
     such errors. The order can make a significant difference on the result 
     when aggregating floating point numbers ({\color{red}cite})}
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{| c | c | c | c | c | c |}
+    \hline
+    \emph{X} & \emph{Y} & \emph{Z} & \emph{Potential CPU} &
+    \emph{Potential Phi} & \emph{Potential GPU} \\ \hline
+    -149.621002&-8.794000&57.660999&10.122{\color{green}498}
+        &10.122{\color{green}360}&10.122{\color{green}365}\\ \hline
+    -149.089996&-9.059000&57.917999&9.907263&9.907115&9.907116\\ \hline
+    -148.776993&-9.191000&58.476002&10.231970&10.231943&10.231955\\ \hline
+    -148.505997&-8.386000&55.984001&9.154871&9.154922&9.154802\\ \hline
+    -149.130997&-8.230000&56.039001&9.669180&9.669030&9.669052\\ \hline
+    -148.097000&-7.226000&55.132000&8.510691&8.510773&8.510720\\ \hline
+    -148.876007&-5.677000&56.301998&8.471642&8.471683&8.471646\\ \hline
+    -149.798996&-6.903000&57.042000&9.940656&9.940581&9.940654\\ \hline
+    -149.029007&-3.043000&56.825001&9.355530&9.355526&9.355562\\ \hline
+    -148.658997&-3.070000&57.645000&9.342840&9.342797&9.342859\\ \hline
+    \end{tabular}
+    \caption{Numeric results in 3 devices.}
+    \label{tab:n1}
+\end{table}
 
 \par{This shows that the Open Dwarfs implementation is 
     more focused on performance rather than experimental accuracy. 
@@ -67,9 +91,12 @@
 \subsubsection{Opportunity for Optimisation}
 \par{The n body implementation in OpenDwarfs calls the kernel multiple 
     times based on the number of vertices in the data file to be processed. 
-    This also depends on the number of global work items.}
+    This also depends on the number of global work items. This is shown in 
+    equation \ref{eq:mono}.}
 
-\par{No of times Kernel is called = No of Vertices/(GWI in X*GWI*Y)}
+\begin{equation}\label{eq:mono}
+    N^o\_of\_times\_kernel\_is\_called = \frac{N^o\_of\_vertices}{{GWI\_in\_X}\times{GWI}\times{Y}}
+\end{equation}
 
 \par{One possible optimisation might be to choose the global work 
     item size such that the total number of work items equals 

@@ -72,10 +72,11 @@
     Streaming Multiprocessors (SM), and also utilise all the cores 
     within due to enough local work items.}
 
-{\centering{120 Work Groups > 13 Compute Units}\\}
-{\centering{256 Work Items > 192 cores within each SM (compute unit)}\\}
+{\centerline{120 Work Groups > 13 Compute Units}}
+{\centerline{256 Work Items > 192 cores within each SM (compute unit)}}
 
-\par{n the worst case scenario, we have enough Work Groups 
+
+\par{In the worst case scenario, we have enough Work Groups 
     to utilise all the SM's but the cores inside the SMs 
     are empty due to little amount of local work items. The results
     on the GPU are shown in figure \ref{nbody_gpu}.}
@@ -104,7 +105,8 @@
 \begin{figure}[!h]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/nbody_comp.png}
-    \caption{Graphical trends Nbody problem, Capsid and Nucleosome comparison between architectures.}
+    \caption{Graphical trends Nbody problem, Capsid and Nucleosome 
+            comparison between architectures.}
     \label{nbody_comp}
 \end{figure}
 
